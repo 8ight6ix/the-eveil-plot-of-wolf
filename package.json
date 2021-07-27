@@ -1,7 +1,15 @@
 {
-  "name": "the-eveil-plot-of-wolf",
-  "version": "0.1.0",
-  "private": true,
+  "name": "the-evil-plot-of-wolf",
+  "description": "Aesop's Fables The Evil Plot Of Wolf",
+  "version": "1.0.0",
+  "author": {
+    "name": "Hant",
+    "email": "hangem422@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/8ight6ix/the-eveil-plot-of-wolf"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
