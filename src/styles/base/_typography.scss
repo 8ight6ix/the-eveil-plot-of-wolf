@@ -1,0 +1,39 @@
+@import url('https://use.typekit.net/pjd8vat.css');
+
+@font-face {
+  font-family: NanumSquare;
+  font-display: swap;
+  src: url('/static/fonts/NanumSquare-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: NanumSquare;
+  font-display: swap;
+  src: url('/static/fonts/NanumSquare-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+.font-main-ko {
+  font-family: NanumSquare, sans-serif;
+  font-weight: 400;
+}
+
+.font-title-ko {
+  font-family: NanumSquare, sans-serif;
+  font-weight: 700;
+}
+
+.font-main-en {
+  font-family: gill-sans-nova, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-title-en {
+  font-family: gill-sans-nova, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
