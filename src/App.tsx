@@ -1,29 +1,32 @@
-import React, { useState, useCallback, useRef, useMemo } from 'react';
+import React, { useState, useCallback, useRef, useMemo, useEffect } from 'react';
 
-import Scene01 from 'scenes/scene01';
-import animation from 'static/animation/index.json';
+import Sequence01 from 'sequences/sequence01';
+import animation from 'statics/animation/index.json';
 import 'styles/main.scss';
-import { clearTimeout, setTimeout } from 'timers';
 
 function App() {
+  const app = useRef<HTMLDivElement>(null); // Application Container Element
+  const [width, setWidth] = useState(0); // Application Width
+  const [height, setHeight] = useState(0); // Application Height
+
   const [scene, setScene] = useState(1); // 현재 Scene 번호
   const [progress, setProgress] = useState(0); // 현재 Scene 진행률
-  const [actionFlag, setActionFlag] = useState(false); // 앤션 진행 플래그
-  const [eventFalg, setEventFlag] = useState(false); // 이벤트 디바운스를 위한 플래그
+  const actionFlag = useRef(false); // 앤션 진행 플래그
+  const eventFalg = useRef(false); // 이벤트 디바운스를 플래그
 
   const actionCnt = useRef<number>(0); // 현재 Action 수행중인 Sequence 갯수
   const wheelStop = useRef<ReturnType<typeof setTimeout>>(); // 마우스 휠이 멈추면 발생하는 Timeout Event Handler
-  const isMaxScene = useMemo(() => scene > animation.totalScene, [scene]); // 현재 Scene이 마지막인지
-  const isMinScene = useMemo(() => scene === 1, [scene]); // 현재 Scene이 처음인지
+  const isMaxScene = useMemo(() => scene > animation.totalScene, [scene]); // 현재 Scene이 마지막인지 여부
+  const isMinScene = useMemo(() => scene === 1, [scene]); // 현재 Scene이 처음인지 여부
 
-  // 다음 쇼트를 진행합니다.
+  // 다음 Scene을 진행합니다.
   const moveNextScene = useCallback(() => {
     if (isMaxScene) return;
     setScene(scene + 1);
     setProgress(0);
   }, [isMaxScene, scene]);
 
-  // 이전 쇼트를 진행합니다.
+  // 이전 Scene을 진행합니다.
   const movePrevScene = useCallback(() => {
     if (isMinScene) return;
     setScene(scene - 1);
@@ -31,20 +34,23 @@ function App() {
   }, [isMinScene, scene]);
 
   // Sequence의 Action 실행/종료를 보고 받습니다.
-  const registAction = useCallback((regist: boolean) => {
-    if (regist) actionCnt.current += 1;
-    else actionCnt.current -= 1;
+  const registAction = useCallback(
+    (regist: boolean) => {
+      if (regist) actionCnt.current += 1;
+      else if (actionCnt.current > 0) actionCnt.current -= 1;
 
-    if (actionFlag && actionCnt.current === 0) {
-      // Action 중에 Action을 진행하고 있는 Sequece가 0이 되면 Action을 종료합니다.
-      if (progress > 0) moveNextScene();
-      else movePrevScene();
-      setActionFlag(false);
-    } else if (actionFlag && actionCnt.current > 0) {
-      // Action 증이 아닌데 Action을 진행하는 Sequnce가 생기면 Action Flag를 활성화 합니다.
-      setActionFlag(true);
-    }
-  }, []);
+      if (actionCnt.current === 0) {
+        actionFlag.current = false;
+        // 전체 Action 종료 후 진행도에 따라 다음 혹은 이전 Scene으로 이동합니다.
+        if (progress === 100) moveNextScene();
+        else if (progress === -100) movePrevScene();
+      } else if (!actionFlag.current) {
+        // Action 증이 아닌데 Action을 진행하는 Sequnce가 생기면 Action Flag를 활성화 합니다.
+        actionFlag.current = true;
+      }
+    },
+    [progress],
+  );
 
   // 진행률의 변동을 반영합니다.
   const renderProgress = useCallback(
@@ -56,8 +62,8 @@ function App() {
 
       // 진행률이 일장 값 이상 도달하면, 자동으로 수행합니다.
       if (Math.abs(next) >= animation.actionStart) {
+        actionFlag.current = true;
         setProgress(next > 0 ? 100 : -100);
-        setActionFlag(true);
       } else {
         setProgress(next);
       }
@@ -68,26 +74,49 @@ function App() {
   const wheelCallback = useCallback(
     (e: React.WheelEvent<HTMLDivElement>) => {
       // Flag가 있거나, 수직 변동 값이 없으면 진행하지 않습니다.
-      if (eventFalg && actionFlag) return;
+      if (eventFalg.current && actionFlag.current) return;
 
       window.requestAnimationFrame(() => {
         // 마우스 움직임을 Process에 반여하고, Event Flag는 제거합니다.
+        eventFalg.current = false;
         renderProgress(e.deltaY);
-        setEventFlag(false);
 
         // Action 상태가 아닌데 Wheel이 멈추면 Process를 초기화합니다.
         if (wheelStop.current) clearTimeout(wheelStop.current);
-        if (!actionFlag) wheelStop.current = setTimeout(() => setProgress(0), 100);
+        wheelStop.current = setTimeout(() => {
+          if (!actionFlag.current) setProgress(0);
+        }, 100);
       });
 
-      setEventFlag(true);
+      eventFalg.current = true;
     },
-    [eventFalg, actionFlag, renderProgress],
+    [renderProgress],
   );
 
+  // Window 사이즈가 조정되면 Sequence Container들을 resize합니다.
+  const resize = useCallback(() => {
+    if (app.current) {
+      setWidth(app.current.clientWidth);
+      setHeight(app.current.clientHeight);
+    }
+  }, []);
+
+  useEffect(() => {
+    resize();
+    window.addEventListener('resize', resize);
+    return () => window.removeEventListener('resize', resize);
+  }, [resize]);
+
   return (
-    <div className="App" onWheel={wheelCallback}>
-      <Scene01 scene={scene} progress={progress} registAction={registAction} />
+    <div className="App" onWheel={wheelCallback} ref={app}>
+      <Sequence01
+        scene={scene}
+        progress={progress}
+        width={width}
+        height={height}
+        actionFlag={actionFlag.current}
+        registAction={registAction}
+      />
     </div>
   );
 }

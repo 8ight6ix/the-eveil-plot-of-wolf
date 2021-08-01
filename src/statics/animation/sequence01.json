@@ -1,0 +1,10 @@
+{
+  "loadAction": false,
+  "baseWith": 100,
+  "baseHeight": 100,
+  "startScene": 1,
+  "asyncs": [true, true],
+  "cuts": {
+    "container": [{ "anchor": "left top", "x": 0, "y": 0 }, { "y": -100 }]
+  }
+}
