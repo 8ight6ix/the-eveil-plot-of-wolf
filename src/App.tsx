@@ -5,9 +5,8 @@ import animation from 'statics/animation/index.json';
 import 'styles/main.scss';
 
 function App() {
-  const app = useRef<HTMLDivElement>(null); // Application Container Element
-  const [width, setWidth] = useState(0); // Application Width
-  const [height, setHeight] = useState(0); // Application Height
+  const [width, setWidth] = useState(document.body.clientWidth); // Application Width
+  const [height, setHeight] = useState(document.body.clientHeight); // Application Height
 
   const [scene, setScene] = useState(1); // 현재 Scene 번호
   const [progress, setProgress] = useState(0); // 현재 Scene 진행률
@@ -16,41 +15,29 @@ function App() {
 
   const actionCnt = useRef<number>(0); // 현재 Action 수행중인 Sequence 갯수
   const wheelStop = useRef<ReturnType<typeof setTimeout>>(); // 마우스 휠이 멈추면 발생하는 Timeout Event Handler
-  const isMaxScene = useMemo(() => scene > animation.totalScene, [scene]); // 현재 Scene이 마지막인지 여부
+  const isMaxScene = useMemo(() => scene === animation.totalScene, [scene]); // 현재 Scene이 마지막인지 여부
   const isMinScene = useMemo(() => scene === 1, [scene]); // 현재 Scene이 처음인지 여부
 
   // 다음 Scene을 진행합니다.
   const moveNextScene = useCallback(() => {
-    if (isMaxScene) return;
-    setScene(scene + 1);
-    setProgress(0);
-  }, [isMaxScene, scene]);
+    if (!isMaxScene) setScene(scene + 1);
+    if (progress) setProgress(0);
+  }, [isMaxScene, scene, progress]);
 
   // 이전 Scene을 진행합니다.
   const movePrevScene = useCallback(() => {
-    if (isMinScene) return;
-    setScene(scene - 1);
-    setProgress(0);
-  }, [isMinScene, scene]);
+    if (!isMinScene) setScene(scene - 1);
+    if (progress) setProgress(0);
+  }, [isMinScene, scene, progress]);
 
   // Sequence의 Action 실행/종료를 보고 받습니다.
-  const registAction = useCallback(
-    (regist: boolean) => {
-      if (regist) actionCnt.current += 1;
-      else if (actionCnt.current > 0) actionCnt.current -= 1;
+  const registAction = useCallback((regist: boolean) => {
+    if (regist) actionCnt.current += 1;
+    else if (actionCnt.current > 0) actionCnt.current -= 1;
 
-      if (actionCnt.current === 0) {
-        actionFlag.current = false;
-        // 전체 Action 종료 후 진행도에 따라 다음 혹은 이전 Scene으로 이동합니다.
-        if (progress === 100) moveNextScene();
-        else if (progress === -100) movePrevScene();
-      } else if (!actionFlag.current) {
-        // Action 증이 아닌데 Action을 진행하는 Sequnce가 생기면 Action Flag를 활성화 합니다.
-        actionFlag.current = true;
-      }
-    },
-    [progress],
-  );
+    if (actionCnt.current === 0) actionFlag.current = false;
+    else if (actionFlag.current === false) actionFlag.current = true;
+  }, []);
 
   // 진행률의 변동을 반영합니다.
   const renderProgress = useCallback(
@@ -60,10 +47,11 @@ function App() {
       if (next > 0 && isMaxScene) return;
       if (next < 0 && isMinScene) return;
 
-      // 진행률이 일장 값 이상 도달하면, 자동으로 수행합니다.
+      // 진행률이 일장 값 이상 도달하면 다음 Scene으로 이동합니다.
       if (Math.abs(next) >= animation.actionStart) {
         actionFlag.current = true;
-        setProgress(next > 0 ? 100 : -100);
+        if (next > 0) moveNextScene();
+        else movePrevScene();
       } else {
         setProgress(next);
       }
@@ -71,10 +59,11 @@ function App() {
     [progress, isMaxScene, isMinScene],
   );
 
+  // Wheel의 동작을 처리합니다.
   const wheelCallback = useCallback(
     (e: React.WheelEvent<HTMLDivElement>) => {
       // Flag가 있거나, 수직 변동 값이 없으면 진행하지 않습니다.
-      if (eventFalg.current && actionFlag.current) return;
+      if (eventFalg.current || actionFlag.current) return;
 
       window.requestAnimationFrame(() => {
         // 마우스 움직임을 Process에 반여하고, Event Flag는 제거합니다.
@@ -95,10 +84,8 @@ function App() {
 
   // Window 사이즈가 조정되면 Sequence Container들을 resize합니다.
   const resize = useCallback(() => {
-    if (app.current) {
-      setWidth(app.current.clientWidth);
-      setHeight(app.current.clientHeight);
-    }
+    setWidth(document.body.clientWidth);
+    setHeight(document.body.clientHeight);
   }, []);
 
   useEffect(() => {
@@ -108,15 +95,8 @@ function App() {
   }, [resize]);
 
   return (
-    <div className="App" onWheel={wheelCallback} ref={app}>
-      <Sequence01
-        scene={scene}
-        progress={progress}
-        width={width}
-        height={height}
-        actionFlag={actionFlag.current}
-        registAction={registAction}
-      />
+    <div className="App" onWheel={wheelCallback}>
+      <Sequence01 scene={scene} progress={progress} width={width} height={height} registAction={registAction} />
     </div>
   );
 }

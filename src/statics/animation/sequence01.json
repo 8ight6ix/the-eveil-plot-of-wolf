@@ -1,10 +1,10 @@
 {
-  "loadAction": false,
   "baseWith": 100,
   "baseHeight": 100,
   "startScene": 1,
-  "asyncs": [true, true],
+  "duration": 1200,
+  "shortDest": [0, 1, 2],
   "cuts": {
-    "container": [{ "anchor": "left top", "x": 0, "y": 0 }, { "y": -100 }]
+    "container": [{ "anchor": "left top", "x": 0, "y": 100 }, { "y": 0 }, { "y": -100 }]
   }
 }

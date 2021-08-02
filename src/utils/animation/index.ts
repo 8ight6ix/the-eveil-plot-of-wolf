@@ -7,10 +7,11 @@ export const parseRowDatas = Animation.createAnimationList;
 export function parseAnimation(short: number, progress: number, anis: Animation[]) {
   if (short <= 0 && progress <= 0) return anis[0]; // 더이상 뒤로갈 에니메이션이 없는 경우
   if (short >= anis.length - 1 && progress >= 0) return anis[anis.length - 1]; // 더이상 앞으로갈 에니메이션이 없는 경우
+  if (progress === 0) return anis[short]; // progress가 0인 경우
 
-  const absProgress = Math.abs(progress);
   const curAni = anis[short];
   const nextAni = progress >= 0 ? anis[short + 1] : anis[short - 1];
+  const absProgress = Math.abs(progress);
 
   const x = parser.parseX(curAni, nextAni, absProgress);
   const y = parser.parseY(curAni, nextAni, absProgress);
