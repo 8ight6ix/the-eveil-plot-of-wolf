@@ -1,4 +1,4 @@
-import Animation from 'utils/animation/model';
+import Animation from 'modules/animation/model';
 
 // 변화를 반영한 X 값을 반환합니다.
 export function parseX(cur: Animation, next: Animation, progress: number) {

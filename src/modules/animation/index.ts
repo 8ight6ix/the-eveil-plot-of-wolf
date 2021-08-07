@@ -1,6 +1,6 @@
 import React from 'react';
-import Animation, { InformationRowData } from 'utils/animation/model';
-import * as parser from 'utils/animation/parser';
+import Animation, { InformationRowData } from 'modules/animation/model';
+import * as parser from 'modules/animation/parser';
 
 interface ParseStyleParma {
   ani: Animation;

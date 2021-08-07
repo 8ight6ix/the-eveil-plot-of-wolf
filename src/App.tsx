@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef, useMemo, useEffect } from 'react';
 
-import Sequence01 from 'sequences/sequence01';
+import Sequence01 from 'components/sequence01';
 import animation from 'statics/animation/index.json';
 import 'styles/main.scss';
 

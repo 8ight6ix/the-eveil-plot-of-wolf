@@ -1,11 +1,10 @@
 import React, { useMemo, useEffect, useState, useRef } from 'react';
 import classNames from 'classnames/bind';
 
-import { parseRowDatas, parseAnimation, parseStyle } from 'utils/animation';
 import data from 'statics/animation/sequence01.json';
 import styleScene01 from 'styles/page/scene01.module.scss';
-
-import Title from 'sequences/sequence01/title';
+import UseSequnce from 'modules/hooks/use-sequence';
+import Title from 'components/sequence01/title';
 
 const cxScene = classNames.bind(styleScene01);
 const info = data.cuts.container;
@@ -19,27 +18,23 @@ interface Sequence01rops {
 }
 
 function Sequence01({ scene, progress, stageWidth, stageHeight, registAction }: Sequence01rops) {
-  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  const [_load, setLoad] = useState(false);
   const [short, setShort] = useState(0); // 현재 Sequence Short 번호
   const endScene = useMemo(() => data.shortDest.length + data.startScene, []); // 더이상 진행할 내용일 없는 Scene 번호
-
   const target = useRef<HTMLDivElement>(null);
-  const [targetWidth, targetHeight] = useMemo(() => {
-    if (!target.current) return [0, 0];
-    return [target.current.clientWidth, target.current.clientHeight];
-  }, [target.current, stageWidth, stageHeight]);
 
   const containerClass = useMemo(() => cxScene('container'), []);
   const stageClass = useMemo(() => cxScene('stage'), []);
 
-  // Animation 정보를 활용해 Transform Style Object를 만듭니다.
-  const animtions = useMemo(() => parseRowDatas(info.animation), []);
-  const style = useMemo(() => {
-    const { baseWidth, baseHeight } = info;
-    const ani = parseAnimation(short, progress, animtions);
-    return parseStyle({ ani, baseWidth, baseHeight, stageWidth, stageHeight, targetWidth, targetHeight });
-  }, [animtions, short, progress, targetWidth, targetHeight]);
+  const { style, targetWidth, targetHeight } = UseSequnce({
+    short,
+    progress,
+    target: target.current,
+    stageWidth,
+    stageHeight,
+    baseWidth: info.baseWidth,
+    baseHeight: info.baseHeight,
+    animationInfo: info.animation,
+  });
 
   // Scene에 해당하는 목표 Short 번호에 맞게 다음 Short 번호를 설정합니다.
   useEffect(() => {
@@ -69,11 +64,6 @@ function Sequence01({ scene, progress, stageWidth, stageHeight, registAction }: 
       else setShort(nextShort);
     }, data.duration);
   }, [short]);
-
-  // Component가 Load되면 사이즈 재 측정 등의 로직을 수행해야 합니다.
-  useEffect(() => {
-    setLoad(true);
-  }, []);
 
   return (
     <div className={containerClass} style={style}>
