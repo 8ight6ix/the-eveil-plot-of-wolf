@@ -2,12 +2,12 @@ import React, { useMemo, useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import { parseRowDatas, parseAnimation, parseStyle } from 'utils/animation';
-import aniInfo from 'statics/animation/sequence01.json';
+import aniInfo from 'statics/animation/sequence02.json';
 import styleScene01 from 'styles/page/scene01.module.scss';
 
 const cxScene = classNames.bind(styleScene01);
 
-interface Sequence01rops {
+interface Sequence02rops {
   scene: number;
   progress: number;
   width: number;
@@ -15,7 +15,7 @@ interface Sequence01rops {
   registAction: (regist: boolean) => void;
 }
 
-function Sequence01({ scene, progress, width, height, registAction }: Sequence01rops) {
+function Sequence02({ scene, progress, width, height, registAction }: Sequence02rops) {
   const [short, setShort] = useState(0); // 현재 Sequence Short 번호
   const endScene = useMemo(() => aniInfo.shortDest.length + aniInfo.startScene, []); // 더이상 진행할 내용일 없는 Scene 번호
 
@@ -66,4 +66,4 @@ function Sequence01({ scene, progress, width, height, registAction }: Sequence01
   );
 }
 
-export default Sequence01;
+export default Sequence02;

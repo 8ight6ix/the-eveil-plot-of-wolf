@@ -3,8 +3,8 @@
   "baseHeight": 100,
   "startScene": 1,
   "duration": 1200,
-  "shortDest": [0, 1, 2],
+  "shortDest": [2, 3],
   "cuts": {
-    "container": [{ "anchor": "left top", "x": 0, "y": 100 }, { "y": 0 }, { "y": -100 }]
+    "container": [{ "anchor": "left top", "x": 0, "y": 100 }, {}, { "y": 0 }, { "y": -100 }]
   }
 }

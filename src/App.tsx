@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef, useMemo, useEffect } from 'react';
 
 import Sequence01 from 'sequences/sequence01';
+import Sequence02 from 'sequences/sequence02';
 import animation from 'statics/animation/index.json';
 import 'styles/main.scss';
 
@@ -97,6 +98,7 @@ function App() {
   return (
     <div className="App" onWheel={wheelCallback}>
       <Sequence01 scene={scene} progress={progress} width={width} height={height} registAction={registAction} />
+      <Sequence02 scene={scene} progress={progress} width={width} height={height} registAction={registAction} />
     </div>
   );
 }
