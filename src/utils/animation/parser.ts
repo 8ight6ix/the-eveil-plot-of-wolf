@@ -28,3 +28,17 @@ export function parseScale(cur: Animation, next: Animation, progress: number) {
 export function parseAnchor(cur: Animation, next: Animation, progress: number) {
   return progress >= 0 ? cur.anchor : next.anchor;
 }
+
+// 가로축 Margin 값을 반환합니다.
+export function parseMarginLeft(width: number, anchor: string) {
+  if (anchor === 'right') return -width;
+  if (anchor === 'center') return -(width / 2);
+  return 0;
+}
+
+// 세로축 Margin 값을 반환합니다.
+export function parseMarginTop(height: number, anchor: string) {
+  if (anchor === 'end') return -height;
+  if (anchor === 'center') return -(height / 2);
+  return 0;
+}

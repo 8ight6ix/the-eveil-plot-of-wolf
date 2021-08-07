@@ -29,3 +29,15 @@
     width: 1200px;
   }
 }
+
+.title {
+  font-size: 42px;
+
+  @include respond-to('regular') {
+    font-size: 70px;
+  }
+
+  @include respond-to('medium') {
+    font-size: 85px;
+  }
+}
