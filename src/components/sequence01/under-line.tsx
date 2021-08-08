@@ -6,18 +6,18 @@ import styleScene01 from 'styles/page/scene01.module.scss';
 import UseSequnce from 'modules/hooks/use-sequence';
 
 const cxScene = classNames.bind(styleScene01);
-const info = data.cuts.title;
+const info = data.cuts.underLine;
 
-interface TitleProps {
+interface UnderLineProps {
   short: number;
   progress: number;
   stageWidth: number;
   stageHeight: number;
 }
 
-function Title({ short, progress, stageWidth, stageHeight }: TitleProps) {
+function UnderLine({ short, progress, stageWidth, stageHeight }: UnderLineProps) {
   const target = useRef<HTMLDivElement>(null);
-  const titleClass = useMemo(() => cxScene('title', 'font-title-en'), []);
+  const underLineClass = useMemo(() => cxScene('under-line', 'font-title-en'), []);
 
   const { style } = UseSequnce({
     short,
@@ -31,13 +31,7 @@ function Title({ short, progress, stageWidth, stageHeight }: TitleProps) {
     animationInfo: info.animation,
   });
 
-  // console.log('title', stageWidth, stageHeight, targetWidth, targetHeight);
-
-  return (
-    <span style={style} ref={target} className={titleClass}>
-      Aesop’s Fables
-    </span>
-  );
+  return <div className={underLineClass} style={style} ref={target} />;
 }
 
-export default Title;
+export default UnderLine;

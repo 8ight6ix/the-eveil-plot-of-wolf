@@ -6,18 +6,18 @@ import styleScene01 from 'styles/page/scene01.module.scss';
 import UseSequnce from 'modules/hooks/use-sequence';
 
 const cxScene = classNames.bind(styleScene01);
-const info = data.cuts.title;
+const info = data.cuts.subTitle;
 
-interface TitleProps {
+interface SubTitleProps {
   short: number;
   progress: number;
   stageWidth: number;
   stageHeight: number;
 }
 
-function Title({ short, progress, stageWidth, stageHeight }: TitleProps) {
+function SubTitle({ short, progress, stageWidth, stageHeight }: SubTitleProps) {
   const target = useRef<HTMLDivElement>(null);
-  const titleClass = useMemo(() => cxScene('title', 'font-title-en'), []);
+  const titleClass = useMemo(() => cxScene('sub-title', 'font-title-ko'), []);
 
   const { style } = UseSequnce({
     short,
@@ -31,13 +31,11 @@ function Title({ short, progress, stageWidth, stageHeight }: TitleProps) {
     animationInfo: info.animation,
   });
 
-  // console.log('title', stageWidth, stageHeight, targetWidth, targetHeight);
-
   return (
     <span style={style} ref={target} className={titleClass}>
-      Aesop’s Fables
+      이솝 이야기: 늑대의 흉계
     </span>
   );
 }
 
-export default Title;
+export default SubTitle;

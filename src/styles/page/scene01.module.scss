@@ -7,9 +7,6 @@
   width: 100%;
   height: 100%;
   border: none;
-
-  -webkit-transition: -webkit-transform 1.2s ease;
-  transition: transform 1.2s cubic-bezier(0.2, 0.2, 0, 1);
 }
 
 .stage {
@@ -17,7 +14,7 @@
   position: relative;
   margin-top: 100px;
   margin-bottom: 80px;
-  background-color: red;
+  border: 1px solid;
 
   @include respond-to('regular') {
     width: 678px;
@@ -31,6 +28,8 @@
 }
 
 .title {
+  z-index: 200;
+  line-height: 1;
   font-size: 42px;
 
   @include respond-to('regular') {
@@ -39,5 +38,38 @@
 
   @include respond-to('medium') {
     font-size: 85px;
+  }
+}
+
+.under-line {
+  z-index: 100;
+  height: 52px;
+  width: 290px;
+  border-bottom: 1px solid black;
+  background-color: white;
+
+  @include respond-to('regular') {
+    height: 90px;
+    width: 450px;
+  }
+
+  @include respond-to('medium') {
+    height: 105px;
+    width: 587px;
+  }
+}
+
+.sub-title {
+  padding-top: 62px;
+  font-size: 22px;
+
+  @include respond-to('regular') {
+    padding-top: 110px;
+    font-size: 35px;
+  }
+
+  @include respond-to('medium') {
+    padding-top: 125px;
+    font-size: 45px;
   }
 }

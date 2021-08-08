@@ -3,7 +3,8 @@ import Animation, { InformationRowData } from 'modules/animation/model';
 import * as parser from 'modules/animation/parser';
 
 interface ParseStyleParma {
-  ani: Animation;
+  trans: boolean;
+  duration: number;
   baseWidth: number;
   baseHeight: number;
   stageWidth: number;
@@ -38,31 +39,40 @@ export function parseAnimation(short: number, progress: number, anis: Animation[
   const nextAni = progress >= 0 ? anis[short + 1] : anis[short - 1];
   const absProgress = Math.abs(progress);
 
+  const { visibility } = nextAni;
   const x = parser.parseX(curAni, nextAni, absProgress);
   const y = parser.parseY(curAni, nextAni, absProgress);
   const rotate = parser.parseRotate(curAni, nextAni, absProgress);
-  const scale = parser.parseScale(curAni, nextAni, absProgress);
+  const scaleX = parser.parseScaleX(curAni, nextAni, absProgress);
+  const scaleY = parser.parseScaleY(curAni, nextAni, absProgress);
+  const marginLeft = parser.parseMarginLeft(curAni, nextAni, absProgress);
+  const marginTop = parser.parseMarginTop(curAni, nextAni, absProgress);
   const anchor = parser.parseAnchor(curAni, nextAni, absProgress);
 
-  return new Animation({ x, y, rotate, scale, anchor });
+  return new Animation({ x, y, rotate, scaleX, scaleY, marginLeft, marginTop, anchor, visibility });
 }
 
 // 스타일 객체를 React Component Style Object로 파싱합니다.
-export function parseStyle(opts: ParseStyleParma): React.CSSProperties {
-  const { ani, baseWidth, baseHeight, stageWidth, stageHeight, targetWidth, targetHeight } = opts;
+export function parseStyle(ani: Animation, load: boolean, opts: ParseStyleParma): React.CSSProperties {
+  const { trans, duration, baseWidth, baseHeight, stageWidth, stageHeight, targetWidth, targetHeight } = opts;
 
   const rateW = stageWidth / baseWidth;
   const rateH = stageHeight / baseHeight;
+
   const x = (ani.x * rateW).toFixed(2);
   const y = (ani.y * rateH).toFixed(2);
+  const marginLeft = ((targetWidth * ani.marginLeft) / 100).toFixed(2);
+  const marginTop = ((targetHeight * ani.marginTop) / 100).toFixed(2);
 
-  const transform = [`translate(${x}px, ${y}px)`, `rotate(${ani.rotate}deg)`, `scale(${ani.scale}, ${ani.scale})`];
+  const visibility = load && ani.visibility ? 'visible' : 'hidden';
+  const transition = trans ? `all ${duration / 1000}s cubic-bezier(0.2, 0.2, 0, 1)` : 'none';
+  const transform = [`translate(${x}px, ${y}px)`, `rotate(${ani.rotate}deg)`, `scale(${ani.scaleX}, ${ani.scaleY})`];
   const anchor = ani.anchor.slice(0, 2);
-  const marginLeft = parser.parseMarginLeft(targetWidth, anchor[0]);
-  const marginTop = parser.parseMarginTop(targetHeight, anchor[1] ?? anchor[0]);
 
   return {
     position: 'absolute',
+    visibility,
+    transition,
     transformOrigin: anchor.join(' '),
     transform: transform.join(' '),
     marginLeft: `${marginLeft}px`,

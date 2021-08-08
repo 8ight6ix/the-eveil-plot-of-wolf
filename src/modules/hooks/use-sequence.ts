@@ -4,9 +4,11 @@ import { InformationRowData } from 'modules/animation/model';
 import { parseRowDatas, parseAnimation, parseStyle } from 'modules/animation';
 
 interface UseSequenceProps {
+  key?: string; // For Debug
   short: number;
   progress: number;
   target: HTMLElement | null;
+  duration: number;
   stageWidth: number;
   stageHeight: number;
   baseWidth: number;
@@ -18,6 +20,7 @@ function UseSequence({
   short,
   progress,
   target,
+  duration,
   stageWidth,
   stageHeight,
   baseWidth,
@@ -35,9 +38,11 @@ function UseSequence({
   // Animation 정보를 활용해 Transform Style Object를 만듭니다.
   const animtions = useMemo(() => parseRowDatas(animationInfo), []);
   const style = useMemo(() => {
-    const ani = parseAnimation(short, progress, animtions);
-    return parseStyle({ ani, baseWidth, baseHeight, stageWidth, stageHeight, targetWidth, targetHeight });
-  }, [animtions, short, progress, targetWidth, targetHeight]);
+    const ani = parseAnimation(short, progress, animtions); // progress 수치를 대입한 새로운 Animation 객체를 생성합니다.
+    const trans = load && short > 0; // 로드가 완료되지 않았거나, 첫 short일 떄는 transition이 필요하지 않습니다.
+    const opts = { trans, duration, baseWidth, baseHeight, stageWidth, stageHeight, targetWidth, targetHeight };
+    return parseStyle(ani, load, opts);
+  }, [short, progress, animtions, load, duration, baseWidth, baseHeight, targetWidth, targetHeight]);
 
   // Component가 Load되면 사이즈 재 측정 등의 로직을 수행해야 합니다.
   useEffect(() => {

@@ -19,9 +19,15 @@ export function parseRotate(cur: Animation, next: Animation, progress: number) {
 }
 
 // 변화를 반영한 Scale 값을 반환합니다.
-export function parseScale(cur: Animation, next: Animation, progress: number) {
-  const scale = ((next.scale - cur.scale) * progress) / 100;
-  return cur.scale + scale;
+export function parseScaleX(cur: Animation, next: Animation, progress: number) {
+  const scale = ((next.scaleX - cur.scaleX) * progress) / 100;
+  return cur.scaleX + scale;
+}
+
+// 변화를 반영한 Scale 값을 반환합니다.
+export function parseScaleY(cur: Animation, next: Animation, progress: number) {
+  const scale = ((next.scaleY - cur.scaleY) * progress) / 100;
+  return cur.scaleY + scale;
 }
 
 // 변화를 반영한 Anchor 값을 반환합니다.
@@ -29,16 +35,12 @@ export function parseAnchor(cur: Animation, next: Animation, progress: number) {
   return progress >= 0 ? cur.anchor : next.anchor;
 }
 
-// 가로축 Margin 값을 반환합니다.
-export function parseMarginLeft(width: number, anchor: string) {
-  if (anchor === 'right') return -width;
-  if (anchor === 'center') return -(width / 2);
-  return 0;
+export function parseMarginLeft(cur: Animation, next: Animation, progress: number) {
+  const marginLeft = ((next.marginLeft - cur.marginLeft) * progress) / 100;
+  return cur.marginLeft + marginLeft;
 }
 
-// 세로축 Margin 값을 반환합니다.
-export function parseMarginTop(height: number, anchor: string) {
-  if (anchor === 'end') return -height;
-  if (anchor === 'center') return -(height / 2);
-  return 0;
+export function parseMarginTop(cur: Animation, next: Animation, progress: number) {
+  const marginTop = ((next.marginTop - cur.marginTop) * progress) / 100;
+  return cur.marginTop + marginTop;
 }
