@@ -26,9 +26,7 @@ function Title({ short, progress, stageWidth, stageHeight }: TitleProps) {
     duration: data.duration,
     stageWidth,
     stageHeight,
-    baseWidth: info.baseWidth,
-    baseHeight: info.baseHeight,
-    animationInfo: info.animation,
+    data: info,
   });
 
   return (

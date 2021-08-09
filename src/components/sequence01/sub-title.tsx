@@ -26,9 +26,7 @@ function SubTitle({ short, progress, stageWidth, stageHeight }: SubTitleProps) {
     duration: data.duration,
     stageWidth,
     stageHeight,
-    baseWidth: info.baseWidth,
-    baseHeight: info.baseHeight,
-    animationInfo: info.animation,
+    data: info,
   });
 
   return (

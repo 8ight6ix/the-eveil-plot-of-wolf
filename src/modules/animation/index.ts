@@ -1,5 +1,5 @@
 import React from 'react';
-import Animation, { InformationRowData } from 'modules/animation/model';
+import Animation, { AnimtaionRowData } from 'modules/animation/model';
 import * as parser from 'modules/animation/parser';
 
 interface ParseStyleParma {
@@ -14,7 +14,7 @@ interface ParseStyleParma {
 }
 
 // Row Data 리스트를 Information 리스트로 파싱합니다.
-export function parseRowDatas(rows: InformationRowData[]) {
+export function parseRowDatas(rows: AnimtaionRowData[]) {
   const size = rows.length;
   const animations = Array<Animation>(size);
 
@@ -58,24 +58,29 @@ export function parseStyle(ani: Animation, load: boolean, opts: ParseStyleParma)
 
   const rateW = stageWidth / baseWidth;
   const rateH = stageHeight / baseHeight;
-
   const x = (ani.x * rateW).toFixed(2);
   const y = (ani.y * rateH).toFixed(2);
+
+  const anchor = ani.anchor.slice(0, 2);
+  const visibility = load && ani.visibility ? 'visible' : 'hidden';
   const marginLeft = ((targetWidth * ani.marginLeft) / 100).toFixed(2);
   const marginTop = ((targetHeight * ani.marginTop) / 100).toFixed(2);
-
-  const visibility = load && ani.visibility ? 'visible' : 'hidden';
-  const transition = trans ? `all ${duration / 1000}s cubic-bezier(0.2, 0.2, 0, 1)` : 'none';
   const transform = [`translate(${x}px, ${y}px)`, `rotate(${ani.rotate}deg)`, `scale(${ani.scaleX}, ${ani.scaleY})`];
-  const anchor = ani.anchor.slice(0, 2);
 
-  return {
+  const style: React.CSSProperties = {
     position: 'absolute',
     visibility,
-    transition,
     transformOrigin: anchor.join(' '),
     transform: transform.join(' '),
     marginLeft: `${marginLeft}px`,
     marginTop: `${marginTop}px`,
   };
+
+  if (trans) {
+    style.transitionProperty = 'transform, margin';
+    style.transitionDuration = `${duration / 1000}s`;
+    style.transitionTimingFunction = 'cubic-bezier(0.2, 0.2, 0, 1)';
+  }
+
+  return style;
 }

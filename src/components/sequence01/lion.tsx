@@ -38,9 +38,7 @@ function Lion({ short, progress, stageWidth, stageHeight }: LionProps) {
     duration: data.duration,
     stageWidth,
     stageHeight,
-    baseWidth: info.baseWidth,
-    baseHeight: info.baseHeight,
-    animationInfo: info.animation,
+    data: info,
   });
 
   useEffect(() => {

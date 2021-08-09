@@ -1,37 +1,28 @@
 import { useState, useMemo, useEffect } from 'react';
 
-import { InformationRowData } from 'modules/animation/model';
+import { AnimtaionRowData } from 'modules/animation/model';
 import { parseRowDatas, parseAnimation, parseStyle } from 'modules/animation';
 
+interface UseSequenceData {
+  baseWidth: number;
+  baseHeight: number;
+  animationData: AnimtaionRowData[];
+}
+
 interface UseSequenceProps {
-  key?: string; // For Debug
   short: number;
   progress: number;
   target: HTMLElement | null;
   duration: number;
   stageWidth: number;
   stageHeight: number;
-  baseWidth: number;
-  baseHeight: number;
-  animationInfo: InformationRowData[];
+  data: UseSequenceData;
 }
 
-function UseSequence({
-  // key,
-  short,
-  progress,
-  target,
-  duration,
-  stageWidth,
-  stageHeight,
-  baseWidth,
-  baseHeight,
-  animationInfo,
-}: UseSequenceProps) {
+function UseSequence({ short, progress, target, duration, stageWidth, stageHeight, data }: UseSequenceProps) {
   const [load, setLoad] = useState(false);
+  const { baseHeight, baseWidth, animationData } = data;
 
-  // useMemo로 stage의 가로 세로가 바뀌었을 때 target의 사이즈를 재 측정하게 해봤다.
-  // window의 사이즈가 변했을 때 채 container 와의 target clinet 사이즈가 바뀌어있지 않다.
   // Traget의 사이즈를 수집합니다.
   const [targetWidth, targetHeight] = useMemo(() => {
     if (!target) return [0, 0];
@@ -39,7 +30,7 @@ function UseSequence({
   }, [target, stageWidth, stageHeight]);
 
   // Animation 정보를 활용해 Transform Style Object를 만듭니다.
-  const animtions = useMemo(() => parseRowDatas(animationInfo), []);
+  const animtions = useMemo(() => parseRowDatas(animationData), []);
   const style = useMemo(() => {
     const ani = parseAnimation(short, progress, animtions); // progress 수치를 대입한 새로운 Animation 객체를 생성합니다.
     const trans = load && short > 0; // 로드가 완료되지 않았거나, 첫 short일 떄는 transition이 필요하지 않습니다.

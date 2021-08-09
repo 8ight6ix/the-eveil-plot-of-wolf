@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import data from 'static/animation/sequence01.json';
 import styleScene01 from 'styles/page/scene01.module.scss';
 import UseSequnce from 'modules/hooks/use-sequence';
+import { callAfterRerender } from 'modules/helper';
 
 import Title from 'components/sequence01/title';
 import UnderLine from 'components/sequence01/under-line';
@@ -38,15 +39,13 @@ function Sequence01({ scene, progress, appWidth, appHeight, registAction }: Sequ
     duration: data.duration,
     stageWidth: appWidth,
     stageHeight: appHeight,
-    baseWidth: info.baseWidth,
-    baseHeight: info.baseHeight,
-    animationInfo: info.animation,
+    data: info,
   });
 
   //  하위 컴포너트가 필요한 것은 Container의 사이즈가 아니라 Stage의 사이즈입니다.
   const [stageWidth, stageHeight] = useMemo(() => {
     if (!stage.current) return [0, 0];
-    return [stage.current?.clientWidth, stage.current?.clientHeight];
+    return [stage.current.clientWidth, stage.current.clientHeight];
   }, [stage.current, targetWidth, targetHeight]);
 
   // Scene에 해당하는 목표 Short 번호에 맞게 다음 Short 번호를 설정합니다.
@@ -58,12 +57,10 @@ function Sequence01({ scene, progress, appWidth, appHeight, registAction }: Sequ
       if (short !== shortDest) {
         // Short의 변경이 필요하다면 Action 실행을 등록합니다.
         const shortNext = shortDest > short ? short + 1 : shortDest;
-        // short가 자동으로 0에서 1로 이동할 때 문제가 발생합니다.
-        // short0 position이 Dom Tree에 반영되기 전에 short1의 posiotn이 렌더되는 것 같습니다.
-        // 결국 한번에 Dom Tree에 반영되고 init -> short0 -> short1이 아니라, 바로 init -> short1이 되는 현상이 일어납니다.
-        // 때문에 Dom Tree 반영을 먼저 시키고 short를 이동하기 위한 수단으로 다음과 같이 setTimeout을 활용합니다.
-        if (short === 0) setTimeout(() => setShort(shortNext), 100);
-        else setShort(shortNext);
+        // useState로 short를 변경하게되면, Repaint가 수행되기 전에 short 번호가 변경되는 것 같습니다.
+        // 그로인해 short가 before load => 0 => 1이 아니라, before load => 1이 반영됩니다.
+        // requestAnimationFrame을 render 전에 다시 한번 요청하는 트릭을 사용해서 해결합니다.
+        callAfterRerender(() => setShort(shortNext));
         registAction(true);
       }
     }

@@ -1,4 +1,4 @@
-export interface InformationRowData {
+export interface AnimtaionRowData {
   x?: number;
   y?: number;
   rotate?: number;
@@ -10,7 +10,7 @@ export interface InformationRowData {
   visibility?: boolean;
 }
 
-class Information {
+class Animation {
   private _x: number;
 
   private _y: number;
@@ -65,7 +65,7 @@ class Information {
     return this._visibility;
   }
 
-  constructor(row: InformationRowData, defRow?: Information) {
+  constructor(row: AnimtaionRowData, defRow?: Animation) {
     this._x = row.x ?? defRow?.x ?? 0;
     this._y = row.y ?? defRow?.y ?? 0;
     this._rotate = row.rotate ?? defRow?.rotate ?? 0;
@@ -78,4 +78,4 @@ class Information {
   }
 }
 
-export default Information;
+export default Animation;

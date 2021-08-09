@@ -6,22 +6,22 @@
     "container": {
       "baseWidth": 100,
       "baseHeight": 100,
-      "animation": [{ "x": 0, "y": 0 }]
+      "animationData": [{ "x": 0, "y": 0 }]
     },
     "title": {
       "baseWidth": 1920,
       "baseHeight": 1080,
-      "animation": [{ "x": 960, "y": 0, "marginLeft": -50 }]
+      "animationData": [{ "x": 960, "y": 0, "marginLeft": -50 }]
     },
     "underLine": {
       "baseWidth": 1920,
       "baseHeight": 1080,
-      "animation": [{ "x": 960, "y": 0, "scaleX": 0, "marginLeft": -50 }, { "scaleX": 1 }]
+      "animationData": [{ "x": 960, "y": 0, "scaleX": 0, "marginLeft": -50 }, { "scaleX": 1 }]
     },
     "subTitle": {
       "baseWidth": 1920,
       "baseHeight": 1080,
-      "animation": [
+      "animationData": [
         { "x": 960, "y": 0, "marginLeft": -50, "marginTop": -40, "visibility": false },
         {},
         { "marginTop": 0, "visibility": true }
@@ -30,7 +30,7 @@
     "lion": {
       "baseWidth": 1920,
       "baseHeight": 1080,
-      "animation": [{ "x": 960, "y": 1080, "marginLeft": -50, "marginTop": -100 }]
+      "animationData": [{ "x": 960, "y": 1080, "marginLeft": -50, "marginTop": -100 }]
     }
   }
 }

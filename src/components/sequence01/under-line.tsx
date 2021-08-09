@@ -26,9 +26,7 @@ function UnderLine({ short, progress, stageWidth, stageHeight }: UnderLineProps)
     duration: data.duration,
     stageWidth,
     stageHeight,
-    baseWidth: info.baseWidth,
-    baseHeight: info.baseHeight,
-    animationInfo: info.animation,
+    data: info,
   });
 
   return <div className={underLineClass} style={style} ref={target} />;

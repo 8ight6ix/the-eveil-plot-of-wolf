@@ -89,7 +89,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    resize();
     window.addEventListener('resize', resize);
     return () => window.removeEventListener('resize', resize);
   }, [resize]);
