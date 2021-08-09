@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 import classNames from 'classnames/bind';
 
-import data from 'statics/animation/sequence01.json';
+import data from 'static/animation/sequence01.json';
 import styleScene01 from 'styles/page/scene01.module.scss';
 import UseSequnce from 'modules/hooks/use-sequence';
 

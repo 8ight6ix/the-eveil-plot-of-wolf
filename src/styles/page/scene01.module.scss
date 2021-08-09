@@ -14,7 +14,7 @@
   position: relative;
   margin-top: 100px;
   margin-bottom: 80px;
-  border: 1px solid;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 
   @include respond-to('regular') {
     width: 678px;
@@ -71,5 +71,20 @@
   @include respond-to('medium') {
     padding-top: 125px;
     font-size: 45px;
+  }
+}
+
+.lion {
+  width: 320px;
+  height: 255px;
+
+  @include respond-to('regular') {
+    width: 678px;
+    height: 478.29px;
+  }
+
+  @include respond-to('medium') {
+    width: 791px;
+    height: 558px;
   }
 }

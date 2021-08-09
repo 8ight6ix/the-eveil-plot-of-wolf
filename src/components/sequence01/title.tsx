@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 import classNames from 'classnames/bind';
 
-import data from 'statics/animation/sequence01.json';
+import data from 'static/animation/sequence01.json';
 import styleScene01 from 'styles/page/scene01.module.scss';
 import UseSequnce from 'modules/hooks/use-sequence';
 
@@ -30,8 +30,6 @@ function Title({ short, progress, stageWidth, stageHeight }: TitleProps) {
     baseHeight: info.baseHeight,
     animationInfo: info.animation,
   });
-
-  // console.log('title', stageWidth, stageHeight, targetWidth, targetHeight);
 
   return (
     <span style={style} ref={target} className={titleClass}>

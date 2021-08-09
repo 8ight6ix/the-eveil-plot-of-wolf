@@ -26,6 +26,11 @@
         {},
         { "marginTop": 0, "visibility": true }
       ]
+    },
+    "lion": {
+      "baseWidth": 1920,
+      "baseHeight": 1080,
+      "animation": [{ "x": 960, "y": 1080, "marginLeft": -50, "marginTop": -100 }]
     }
   }
 }

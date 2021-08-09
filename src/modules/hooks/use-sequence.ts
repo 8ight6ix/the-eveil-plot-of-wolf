@@ -17,6 +17,7 @@ interface UseSequenceProps {
 }
 
 function UseSequence({
+  // key,
   short,
   progress,
   target,
@@ -29,6 +30,8 @@ function UseSequence({
 }: UseSequenceProps) {
   const [load, setLoad] = useState(false);
 
+  // useMemo로 stage의 가로 세로가 바뀌었을 때 target의 사이즈를 재 측정하게 해봤다.
+  // window의 사이즈가 변했을 때 채 container 와의 target clinet 사이즈가 바뀌어있지 않다.
   // Traget의 사이즈를 수집합니다.
   const [targetWidth, targetHeight] = useMemo(() => {
     if (!target) return [0, 0];
