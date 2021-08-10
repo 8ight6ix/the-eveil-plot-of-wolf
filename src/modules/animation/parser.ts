@@ -35,12 +35,20 @@ export function parseAnchor(cur: Animation, next: Animation, progress: number) {
   return progress >= 0 ? cur.anchor : next.anchor;
 }
 
+// 변화를 반영한 Margin LEft 값을 반환합니다.
 export function parseMarginLeft(cur: Animation, next: Animation, progress: number) {
   const marginLeft = ((next.marginLeft - cur.marginLeft) * progress) / 100;
   return cur.marginLeft + marginLeft;
 }
 
+// 변화를 반영한 Margin Right 값을 반환합니다.
 export function parseMarginTop(cur: Animation, next: Animation, progress: number) {
   const marginTop = ((next.marginTop - cur.marginTop) * progress) / 100;
   return cur.marginTop + marginTop;
+}
+
+// 변화를 반영한 Opacity 값을 반환합니다.
+export function parseOpacity(cur: Animation, next: Animation, progress: number) {
+  const opactiy = ((next.opactiy - cur.opactiy) * progress) / 100;
+  return cur.opactiy + opactiy;
 }

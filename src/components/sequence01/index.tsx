@@ -10,6 +10,7 @@ import Title from 'components/sequence01/title';
 import UnderLine from 'components/sequence01/under-line';
 import SubTitle from 'components/sequence01/sub-title';
 import Lion from 'components/sequence01/lion';
+import Scroll from 'components/sequence01//scroll';
 
 const cxScene = classNames.bind(styleScene01);
 const info = data.cuts.container;
@@ -89,6 +90,7 @@ function Sequence01({ scene, progress, appWidth, appHeight, registAction }: Sequ
         <UnderLine short={short} progress={progress} stageWidth={stageWidth} stageHeight={stageHeight} />
         <SubTitle short={short} progress={progress} stageWidth={stageWidth} stageHeight={stageHeight} />
         <Lion short={short} progress={progress} stageWidth={stageWidth} stageHeight={stageHeight} />
+        <Scroll short={short} progress={progress} stageWidth={stageWidth} stageHeight={stageHeight} />
       </div>
     </div>
   );

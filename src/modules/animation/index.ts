@@ -48,8 +48,9 @@ export function parseAnimation(short: number, progress: number, anis: Animation[
   const marginLeft = parser.parseMarginLeft(curAni, nextAni, absProgress);
   const marginTop = parser.parseMarginTop(curAni, nextAni, absProgress);
   const anchor = parser.parseAnchor(curAni, nextAni, absProgress);
+  const opacity = parser.parseOpacity(curAni, nextAni, absProgress);
 
-  return new Animation({ x, y, rotate, scaleX, scaleY, marginLeft, marginTop, anchor, visibility });
+  return new Animation({ x, y, rotate, scaleX, scaleY, marginLeft, marginTop, anchor, visibility, opacity });
 }
 
 // 스타일 객체를 React Component Style Object로 파싱합니다.
@@ -63,6 +64,7 @@ export function parseStyle(ani: Animation, load: boolean, opts: ParseStyleParma)
 
   const anchor = ani.anchor.slice(0, 2);
   const visibility = load && ani.visibility ? 'visible' : 'hidden';
+  const opacity = (ani.opactiy / 100).toFixed(2);
   const marginLeft = ((targetWidth * ani.marginLeft) / 100).toFixed(2);
   const marginTop = ((targetHeight * ani.marginTop) / 100).toFixed(2);
   const transform = [`translate(${x}px, ${y}px)`, `rotate(${ani.rotate}deg)`, `scale(${ani.scaleX}, ${ani.scaleY})`];
@@ -70,6 +72,7 @@ export function parseStyle(ani: Animation, load: boolean, opts: ParseStyleParma)
   const style: React.CSSProperties = {
     position: 'absolute',
     visibility,
+    opacity,
     transformOrigin: anchor.join(' '),
     transform: transform.join(' '),
     marginLeft: `${marginLeft}px`,
@@ -77,7 +80,7 @@ export function parseStyle(ani: Animation, load: boolean, opts: ParseStyleParma)
   };
 
   if (trans) {
-    style.transitionProperty = 'transform, margin';
+    style.transitionProperty = 'transform, margin, opacity';
     style.transitionDuration = `${duration / 1000}s`;
     style.transitionTimingFunction = 'cubic-bezier(0.2, 0.2, 0, 1)';
   }

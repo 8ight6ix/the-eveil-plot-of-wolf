@@ -17,7 +17,7 @@ interface UnderLineProps {
 
 function UnderLine({ short, progress, stageWidth, stageHeight }: UnderLineProps) {
   const target = useRef<HTMLDivElement>(null);
-  const underLineClass = useMemo(() => cxScene('under-line', 'font-title-en'), []);
+  const underLineClass = useMemo(() => cxScene('under-line'), []);
 
   const { style } = UseSequnce({
     short,

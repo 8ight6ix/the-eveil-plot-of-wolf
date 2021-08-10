@@ -3,14 +3,14 @@ import classNames from 'classnames/bind';
 import Lottie from 'react-lottie';
 
 import data from 'static/animation/sequence01.json';
-import svg from 'static/svg/lion.json';
+import svg from 'static/svg/scroll.json';
 import styleScene01 from 'styles/page/scene01.module.scss';
 import UseSequnce from 'modules/hooks/use-sequence';
 
 const cxScene = classNames.bind(styleScene01);
-const info = data.cuts.lion;
+const info = data.cuts.scroll;
 
-interface LionProps {
+interface ScrollProps {
   short: number;
   progress: number;
   stageWidth: number;
@@ -26,10 +26,10 @@ const lottieOption = {
   },
 };
 
-function Lion({ short, progress, stageWidth, stageHeight }: LionProps) {
+function Scroll({ short, progress, stageWidth, stageHeight }: ScrollProps) {
   const target = useRef<HTMLDivElement>(null);
   const [play, setPlay] = useState<boolean>(false);
-  const lionClass = useMemo(() => cxScene('lion'), []);
+  const lionClass = useMemo(() => cxScene('scroll'), []);
 
   const { style } = UseSequnce({
     short,
@@ -42,7 +42,7 @@ function Lion({ short, progress, stageWidth, stageHeight }: LionProps) {
   });
 
   useEffect(() => {
-    setPlay(short < 3);
+    setPlay(short === 2);
   }, [short]);
 
   return (
@@ -52,4 +52,4 @@ function Lion({ short, progress, stageWidth, stageHeight }: LionProps) {
   );
 }
 
-export default Lion;
+export default Scroll;

@@ -8,6 +8,7 @@ export interface AnimtaionRowData {
   marginTop?: number;
   anchor?: string[];
   visibility?: boolean;
+  opacity?: number;
 }
 
 class Animation {
@@ -28,6 +29,8 @@ class Animation {
   private _anchor: string[];
 
   private _visibility: boolean;
+
+  private _opacity: number;
 
   get x() {
     return this._x;
@@ -65,6 +68,10 @@ class Animation {
     return this._visibility;
   }
 
+  get opactiy() {
+    return this._opacity;
+  }
+
   constructor(row: AnimtaionRowData, defRow?: Animation) {
     this._x = row.x ?? defRow?.x ?? 0;
     this._y = row.y ?? defRow?.y ?? 0;
@@ -75,6 +82,7 @@ class Animation {
     this._marginTop = row.marginTop ?? defRow?._marginTop ?? 0;
     this._anchor = row.anchor ?? defRow?.anchor ?? ['center'];
     this._visibility = row.visibility ?? defRow?.visibility ?? true;
+    this._opacity = row.opacity ?? defRow?.opactiy ?? 100;
   }
 }
 

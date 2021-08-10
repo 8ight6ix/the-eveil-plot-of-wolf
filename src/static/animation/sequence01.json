@@ -31,6 +31,15 @@
       "baseWidth": 1920,
       "baseHeight": 1080,
       "animationData": [{ "x": 960, "y": 1080, "marginLeft": -50, "marginTop": -100 }]
+    },
+    "scroll": {
+      "baseWidth": 1920,
+      "baseHeight": 1080,
+      "animationData": [
+        { "x": 960, "y": 1080, "marginLeft": -50, "marginTop": -100, "opacity": 0 },
+        {},
+        { "opacity": 100 }
+      ]
     }
   }
 }
