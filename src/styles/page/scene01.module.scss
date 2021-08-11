@@ -34,7 +34,7 @@
   flex-grow: 1;
   min-height: 460px;
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  // border: 1px solid rgba(0, 0, 0, 0.1);
 
   @include respond-to('regular') {
     width: 678px;
@@ -111,4 +111,9 @@
   @include respond-to('regular') {
     width: 73px;
   }
+}
+
+.text {
+  width: 100%;
+  text-align: center;
 }

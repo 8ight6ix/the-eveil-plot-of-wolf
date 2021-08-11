@@ -12,7 +12,7 @@
     "title": {
       "baseWidth": 1920,
       "baseHeight": 1080,
-      "animationData": [{ "x": 960, "y": 0, "marginLeft": -50, "opacity": 100 }, {}, {}, { "y": -170, "opacity": 0 }]
+      "animationData": [{ "x": 960, "y": 0, "marginLeft": -50, "opacity": 100 }, {}, {}, { "y": -300, "opacity": 0 }]
     },
     "underLine": {
       "baseWidth": 1920,
@@ -21,7 +21,7 @@
         { "x": 960, "y": 0, "scaleX": 0, "marginLeft": -50, "opacity": 100 },
         { "scaleX": 1 },
         {},
-        { "y": -170, "opacity": 0 }
+        { "y": -300, "opacity": 0 }
       ]
     },
     "subTitle": {
@@ -31,7 +31,7 @@
         { "x": 960, "y": 0, "marginLeft": -50, "marginTop": -40, "visibility": false, "opacity": 100 },
         {},
         { "marginTop": 0, "visibility": true },
-        { "y": -170, "opacity": 0 }
+        { "y": -300, "opacity": 0 }
       ]
     },
     "lion": {
@@ -53,6 +53,11 @@
         { "opacity": 100 },
         { "opacity": 0 }
       ]
+    },
+    "text": {
+      "baseWidth": 1920,
+      "baseHeight": 1080,
+      "animationData": [{ "x": 0, "y": 1180, "marginTop": -100, "opacity": 0 }, {}, {}, { "y": 1080, "opacity": 100 }]
     }
   }
 }
