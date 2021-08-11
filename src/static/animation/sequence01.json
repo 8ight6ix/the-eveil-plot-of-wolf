@@ -1,7 +1,8 @@
 {
   "startScene": 1,
   "duration": 1200,
-  "shortDest": [2],
+  "shortEnd": 3,
+  "shortDest": [2, 3],
   "cuts": {
     "container": {
       "baseWidth": 100,
@@ -11,26 +12,37 @@
     "title": {
       "baseWidth": 1920,
       "baseHeight": 1080,
-      "animationData": [{ "x": 960, "y": 0, "marginLeft": -50 }]
+      "animationData": [{ "x": 960, "y": 0, "marginLeft": -50, "opacity": 100 }, {}, {}, { "y": -170, "opacity": 0 }]
     },
     "underLine": {
       "baseWidth": 1920,
       "baseHeight": 1080,
-      "animationData": [{ "x": 960, "y": 0, "scaleX": 0, "marginLeft": -50 }, { "scaleX": 1 }]
+      "animationData": [
+        { "x": 960, "y": 0, "scaleX": 0, "marginLeft": -50, "opacity": 100 },
+        { "scaleX": 1 },
+        {},
+        { "y": -170, "opacity": 0 }
+      ]
     },
     "subTitle": {
       "baseWidth": 1920,
       "baseHeight": 1080,
       "animationData": [
-        { "x": 960, "y": 0, "marginLeft": -50, "marginTop": -40, "visibility": false },
+        { "x": 960, "y": 0, "marginLeft": -50, "marginTop": -40, "visibility": false, "opacity": 100 },
         {},
-        { "marginTop": 0, "visibility": true }
+        { "marginTop": 0, "visibility": true },
+        { "y": -170, "opacity": 0 }
       ]
     },
     "lion": {
       "baseWidth": 1920,
       "baseHeight": 1080,
-      "animationData": [{ "x": 960, "y": 1080, "marginLeft": -50, "marginTop": -100 }]
+      "animationData": [
+        { "x": 960, "y": 1080, "marginLeft": -50, "marginTop": -100 },
+        {},
+        {},
+        { "y": 540, "marginTop": -50 }
+      ]
     },
     "scroll": {
       "baseWidth": 1920,
@@ -38,7 +50,8 @@
       "animationData": [
         { "x": 960, "y": 1080, "marginLeft": -50, "marginTop": -100, "opacity": 0 },
         {},
-        { "opacity": 100 }
+        { "opacity": 100 },
+        { "opacity": 0 }
       ]
     }
   }

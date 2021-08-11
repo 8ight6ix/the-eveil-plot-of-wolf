@@ -36,6 +36,7 @@ function Scroll({ short, progress, stageWidth, stageHeight }: ScrollProps) {
     progress,
     target: target.current,
     duration: data.duration,
+    shortEnd: data.shortEnd,
     stageWidth,
     stageHeight,
     data: info,

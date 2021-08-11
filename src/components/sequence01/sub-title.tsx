@@ -24,6 +24,7 @@ function SubTitle({ short, progress, stageWidth, stageHeight }: SubTitleProps) {
     progress,
     target: target.current,
     duration: data.duration,
+    shortEnd: data.shortEnd,
     stageWidth,
     stageHeight,
     data: info,

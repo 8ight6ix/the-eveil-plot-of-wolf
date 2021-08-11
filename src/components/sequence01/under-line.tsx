@@ -24,6 +24,7 @@ function UnderLine({ short, progress, stageWidth, stageHeight }: UnderLineProps)
     progress,
     target: target.current,
     duration: data.duration,
+    shortEnd: data.shortEnd,
     stageWidth,
     stageHeight,
     data: info,

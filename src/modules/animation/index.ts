@@ -14,16 +14,15 @@ interface ParseStyleParma {
 }
 
 // Row Data 리스트를 Information 리스트로 파싱합니다.
-export function parseRowDatas(rows: AnimtaionRowData[]) {
-  const size = rows.length;
-  const animations = Array<Animation>(size);
+export function parseRowDatas(rows: AnimtaionRowData[], shortEnd: number) {
+  const animations = Array<Animation>(shortEnd + 1);
+  const lastAnimation = rows.reduce((prev: Animation | undefined, cur, i) => {
+    animations[i] = new Animation(cur, prev);
+    return animations[i];
+  }, undefined);
 
-  if (size > 0) {
-    // 존재하지 않는 Animation Row Data는 이전 Data의 것을 그대로 사용합니다.
-    animations[0] = new Animation(rows[0]);
-    for (let i = 1; i < size; i += 1) {
-      animations[i] = new Animation(rows[i], animations[i - 1]);
-    }
+  for (let i = rows.length; i <= shortEnd; i += 1) {
+    animations[i] = new Animation({}, lastAnimation);
   }
 
   return animations;

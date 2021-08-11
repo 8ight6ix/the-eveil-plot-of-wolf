@@ -38,6 +38,7 @@ function Sequence01({ scene, progress, appWidth, appHeight, registAction }: Sequ
     progress,
     target: container.current,
     duration: data.duration,
+    shortEnd: data.shortEnd,
     stageWidth: appWidth,
     stageHeight: appHeight,
     data: info,

@@ -36,13 +36,14 @@ function Lion({ short, progress, stageWidth, stageHeight }: LionProps) {
     progress,
     target: target.current,
     duration: data.duration,
+    shortEnd: data.shortEnd,
     stageWidth,
     stageHeight,
     data: info,
   });
 
   useEffect(() => {
-    setPlay(short < 3);
+    setPlay(short < 4);
   }, [short]);
 
   return (
