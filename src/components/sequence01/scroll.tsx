@@ -12,6 +12,7 @@ const info = data.cuts.scroll;
 
 interface ScrollProps {
   short: number;
+  nextShort: number;
   progress: number;
   stageWidth: number;
   stageHeight: number;
@@ -26,13 +27,14 @@ const lottieOption = {
   },
 };
 
-function Scroll({ short, progress, stageWidth, stageHeight }: ScrollProps) {
+function Scroll({ short, nextShort, progress, stageWidth, stageHeight }: ScrollProps) {
   const target = useRef<HTMLDivElement>(null);
   const [play, setPlay] = useState<boolean>(false);
   const lionClass = useMemo(() => cxScene('scroll'), []);
 
   const { style } = UseShort({
     short,
+    nextShort,
     progress,
     target: target.current,
     duration: data.duration,

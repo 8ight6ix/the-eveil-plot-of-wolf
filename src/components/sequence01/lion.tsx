@@ -12,6 +12,7 @@ const info = data.cuts.lion;
 
 interface LionProps {
   short: number;
+  nextShort: number;
   progress: number;
   stageWidth: number;
   stageHeight: number;
@@ -26,13 +27,14 @@ const lottieOption = {
   },
 };
 
-function Lion({ short, progress, stageWidth, stageHeight }: LionProps) {
+function Lion({ short, nextShort, progress, stageWidth, stageHeight }: LionProps) {
   const target = useRef<HTMLDivElement>(null);
   const [play, setPlay] = useState<boolean>(false);
   const lionClass = useMemo(() => cxScene('lion'), []);
 
   const { style } = UseShort({
     short,
+    nextShort,
     progress,
     target: target.current,
     duration: data.duration,

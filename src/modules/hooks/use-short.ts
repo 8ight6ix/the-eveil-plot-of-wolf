@@ -11,6 +11,7 @@ interface UuseShortData {
 
 interface useShorteProps {
   short: number;
+  nextShort: number;
   progress: number;
   target: HTMLElement | null;
   duration: number;
@@ -20,7 +21,17 @@ interface useShorteProps {
   data: UuseShortData;
 }
 
-function useShort({ short, progress, target, duration, shortEnd, stageWidth, stageHeight, data }: useShorteProps) {
+function useShort({
+  short,
+  nextShort,
+  progress,
+  target,
+  duration,
+  shortEnd,
+  stageWidth,
+  stageHeight,
+  data,
+}: useShorteProps) {
   const [load, setLoad] = useState(false);
   const { baseHeight, baseWidth, animationData } = data;
 
@@ -34,9 +45,12 @@ function useShort({ short, progress, target, duration, shortEnd, stageWidth, sta
   /* Create Animation CSS Style Object  */
   /* ********************************** */
 
-  const animationList = useMemo(() => parseRowDatas(animationData, shortEnd), []); // json 데이터를 파싱합니다.
-  const animation = useMemo(() => parseAnimation(short, progress, animationList), [short, progress]); // progress 수치를 대입한 Animation 객체를 생성합니다.
+  const animationList = useMemo(() => parseRowDatas(animationData, shortEnd), [animationData, shortEnd]); // json 데이터를 파싱합니다.
   const trans = useMemo(() => load && short > 0, [load, short]); // load가 끝나기 전과 첫 short에서는 Transition으 적용하지 않습니다.
+  // progress 수치를 대입한 Animation 객체를 생성합니다.
+  const animation = useMemo(() => {
+    return parseAnimation(short, nextShort, progress, animationList);
+  }, [short, nextShort, progress, animationList]);
 
   const style = useMemo(() => {
     const opts = { trans, duration, baseWidth, baseHeight, stageWidth, stageHeight, targetWidth, targetHeight };

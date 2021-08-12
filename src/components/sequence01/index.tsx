@@ -31,9 +31,10 @@ function Sequence01({ scene, progress, appWidth, appHeight, registAction }: Sequ
   const containerClass = useMemo(() => cxScene('container'), []);
   const stageClass = useMemo(() => cxScene('stage'), []);
 
-  const { short } = UseSequence({ scene, progress, data, registAction });
+  const { short, nextShort } = UseSequence({ scene, progress, data, registAction });
   const { style, targetWidth, targetHeight } = UseShort({
     short,
+    nextShort,
     progress,
     target: container.current,
     duration: data.duration,
@@ -52,12 +53,48 @@ function Sequence01({ scene, progress, appWidth, appHeight, registAction }: Sequ
   return (
     <div className={containerClass} style={style} ref={container}>
       <div className={stageClass} ref={stage}>
-        <Title short={short} progress={progress} stageWidth={stageWidth} stageHeight={stageHeight} />
-        <UnderLine short={short} progress={progress} stageWidth={stageWidth} stageHeight={stageHeight} />
-        <SubTitle short={short} progress={progress} stageWidth={stageWidth} stageHeight={stageHeight} />
-        <Lion short={short} progress={progress} stageWidth={stageWidth} stageHeight={stageHeight} />
-        <Scroll short={short} progress={progress} stageWidth={stageWidth} stageHeight={stageHeight} />
-        <Text short={short} progress={progress} stageWidth={stageWidth} stageHeight={stageHeight} />
+        <Title
+          short={short}
+          nextShort={nextShort}
+          progress={progress}
+          stageWidth={stageWidth}
+          stageHeight={stageHeight}
+        />
+        <UnderLine
+          short={short}
+          nextShort={nextShort}
+          progress={progress}
+          stageWidth={stageWidth}
+          stageHeight={stageHeight}
+        />
+        <SubTitle
+          short={short}
+          nextShort={nextShort}
+          progress={progress}
+          stageWidth={stageWidth}
+          stageHeight={stageHeight}
+        />
+        <Lion
+          short={short}
+          nextShort={nextShort}
+          progress={progress}
+          stageWidth={stageWidth}
+          stageHeight={stageHeight}
+        />
+        <Scroll
+          short={short}
+          nextShort={nextShort}
+          progress={progress}
+          stageWidth={stageWidth}
+          stageHeight={stageHeight}
+        />
+        <Text
+          short={short}
+          nextShort={nextShort}
+          progress={progress}
+          stageWidth={stageWidth}
+          stageHeight={stageHeight}
+        />
       </div>
     </div>
   );

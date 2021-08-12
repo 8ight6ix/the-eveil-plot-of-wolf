@@ -10,17 +10,19 @@ const info = data.cuts.underLine;
 
 interface UnderLineProps {
   short: number;
+  nextShort: number;
   progress: number;
   stageWidth: number;
   stageHeight: number;
 }
 
-function UnderLine({ short, progress, stageWidth, stageHeight }: UnderLineProps) {
+function UnderLine({ short, nextShort, progress, stageWidth, stageHeight }: UnderLineProps) {
   const target = useRef<HTMLDivElement>(null);
   const underLineClass = useMemo(() => cxScene('under-line'), []);
 
   const { style } = UseShort({
     short,
+    nextShort,
     progress,
     target: target.current,
     duration: data.duration,

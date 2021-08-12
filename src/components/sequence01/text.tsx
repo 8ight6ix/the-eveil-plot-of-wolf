@@ -10,17 +10,19 @@ const info = data.cuts.text;
 
 interface TextProps {
   short: number;
+  nextShort: number;
   progress: number;
   stageWidth: number;
   stageHeight: number;
 }
 
-function Text({ short, progress, stageWidth, stageHeight }: TextProps) {
+function Text({ short, nextShort, progress, stageWidth, stageHeight }: TextProps) {
   const target = useRef<HTMLDivElement>(null);
   const textCalss = useMemo(() => cxScene('text', 'font-main-ko'), []);
 
   const { style } = UseShort({
     short,
+    nextShort,
     progress,
     target: target.current,
     duration: data.duration,

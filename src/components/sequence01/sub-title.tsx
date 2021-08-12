@@ -10,17 +10,19 @@ const info = data.cuts.subTitle;
 
 interface SubTitleProps {
   short: number;
+  nextShort: number;
   progress: number;
   stageWidth: number;
   stageHeight: number;
 }
 
-function SubTitle({ short, progress, stageWidth, stageHeight }: SubTitleProps) {
+function SubTitle({ short, nextShort, progress, stageWidth, stageHeight }: SubTitleProps) {
   const target = useRef<HTMLDivElement>(null);
   const titleClass = useMemo(() => cxScene('sub-title', 'font-title-ko'), []);
 
   const { style } = UseShort({
     short,
+    nextShort,
     progress,
     target: target.current,
     duration: data.duration,

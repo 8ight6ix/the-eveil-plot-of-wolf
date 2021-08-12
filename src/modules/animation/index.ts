@@ -28,16 +28,12 @@ export function parseRowDatas(rows: AnimtaionRowData[], shortEnd: number) {
   return animations;
 }
 
-// 이전 스타일 객체에서 Short가 진행된 만큼 변화가 반영된 Style 객체를 반환합니다.
-export function parseAnimation(short: number, progress: number, anis: Animation[]) {
-  if (short <= 0 && progress <= 0) return anis[0]; // 더이상 뒤로갈 에니메이션이 없는 경우
-  if (short >= anis.length - 1 && progress >= 0) return anis[anis.length - 1]; // 더이상 앞으로갈 에니메이션이 없는 경우
-  if (progress === 0) return anis[short]; // progress가 0인 경우
-
-  // FIXME: 이전 short로 이동할 떄, short - 1이 아니라 이전 scene의 dest short로 가야함
+// 스타일 객체에서 Short가 진행된 만큼 변화가 반영된 Style 객체를 반환합니다.
+export function parseAnimation(short: number, nextShort: number, progress: number, anis: Animation[]) {
+  if (short === nextShort) return anis[short];
 
   const curAni = anis[short];
-  const nextAni = progress >= 0 ? anis[short + 1] : anis[short - 1];
+  const nextAni = anis[nextShort];
   const absProgress = Math.abs(progress);
 
   const { visibility } = nextAni;

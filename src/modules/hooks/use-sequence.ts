@@ -30,7 +30,7 @@ function UseSequence({ scene, progress, data, registAction }: UseSequenceProps) 
   );
 
   // Progress가 증가함에 따라 이동하게 될 다음 Scene의 Short Number
-  const nextSceneShort = useMemo(() => {
+  const nextShort = useMemo(() => {
     if (progress > 0 && scene < lastScene) return short + 1;
     if (progress < 0 && scene > startScene) return shortDest[relativeScene - 1];
     return short;
@@ -72,7 +72,7 @@ function UseSequence({ scene, progress, data, registAction }: UseSequenceProps) 
 
   return {
     short,
-    nextSceneShort,
+    nextShort,
   };
 }
 

@@ -10,17 +10,19 @@ const info = data.cuts.title;
 
 interface TitleProps {
   short: number;
+  nextShort: number;
   progress: number;
   stageWidth: number;
   stageHeight: number;
 }
 
-function Title({ short, progress, stageWidth, stageHeight }: TitleProps) {
+function Title({ short, nextShort, progress, stageWidth, stageHeight }: TitleProps) {
   const target = useRef<HTMLDivElement>(null);
   const titleClass = useMemo(() => cxScene('title', 'font-title-en'), []);
 
   const { style } = UseShort({
     short,
+    nextShort,
     progress,
     target: target.current,
     duration: data.duration,
