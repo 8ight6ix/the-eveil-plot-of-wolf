@@ -2,6 +2,7 @@ import React, { useMemo, useRef } from 'react';
 import classNames from 'classnames/bind';
 
 import data from 'static/animation/sequence01.json';
+import svg from 'static/svg/title.svg';
 import styleScene01 from 'styles/page/scene01.module.scss';
 import UseShort from 'modules/hooks/use-short';
 
@@ -33,9 +34,9 @@ function Title({ short, nextShort, progress, stageWidth, stageHeight }: TitlePro
   });
 
   return (
-    <span style={style} ref={target} className={titleClass}>
-      Aesop’s Fables
-    </span>
+    <div style={style} ref={target} className={titleClass}>
+      <img src={svg} alt="title" />
+    </div>
   );
 }
 

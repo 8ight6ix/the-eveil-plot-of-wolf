@@ -44,7 +44,7 @@ function UseScrollEvent({ wheelSensitive }: UseScrollEventProps) {
   // Wheel Event의 동작을 처리합니다.
   const wheelCallback = useCallback(
     (e: React.WheelEvent<HTMLDivElement>) => {
-      eventHandler(e.deltaY + dist * wheelSensitive);
+      eventHandler(e.deltaY * wheelSensitive + dist);
     },
     [dist, wheelSensitive],
   );

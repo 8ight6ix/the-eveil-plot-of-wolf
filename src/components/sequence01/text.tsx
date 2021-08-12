@@ -33,9 +33,9 @@ function Text({ short, nextShort, progress, stageWidth, stageHeight }: TextProps
   });
 
   return (
-    <p style={style} ref={target} className={textCalss}>
-      동물들의 왕 사자가 병이 들어 누워 있었습니다.
-    </p>
+    <div style={style} ref={target} className={textCalss}>
+      <p>동물들의 왕 사자가 병이 들어 누워 있었습니다.</p>
+    </div>
   );
 }
 
