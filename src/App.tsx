@@ -6,13 +6,13 @@ import animation from 'static/animation/index.json';
 import 'styles/main.scss';
 
 function App() {
-  const [scene, setScene] = useState(1); // 현재 Scene 번호
+  const [scene, setScene] = useState(0); // 현재 Scene 번호
   const [width, setWidth] = useState(document.body.clientWidth); // Application Width
   const [height, setHeight] = useState(document.body.clientHeight); // Application Height
 
   const actionCnt = useRef<number>(0); // 현재 Action 수행중인 Sequence 갯수
-  const isMaxScene = useMemo(() => scene === animation.totalScene, [scene]); // 현재 Scene이 마지막인지 여부
-  const isMinScene = useMemo(() => scene === 1, [scene]); // 현재 Scene이 처음인지 여부
+  const isMaxScene = useMemo(() => scene === animation.totalScene - 1, [scene]); // 현재 Scene이 마지막인지 여부
+  const isMinScene = useMemo(() => scene === 0, [scene]); // 현재 Scene이 처음인지 여부
 
   const { dist, initDist, setFreeze, wheelCallback, touchStartCallback, touchMoveCallback, touchEndCallback } =
     useScrollEvent({ wheelSensitive: animation.deletaSensitive });

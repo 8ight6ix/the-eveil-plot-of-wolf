@@ -34,6 +34,8 @@ export function parseAnimation(short: number, progress: number, anis: Animation[
   if (short >= anis.length - 1 && progress >= 0) return anis[anis.length - 1]; // 더이상 앞으로갈 에니메이션이 없는 경우
   if (progress === 0) return anis[short]; // progress가 0인 경우
 
+  // FIXME: 이전 short로 이동할 떄, short - 1이 아니라 이전 scene의 dest short로 가야함
+
   const curAni = anis[short];
   const nextAni = progress >= 0 ? anis[short + 1] : anis[short - 1];
   const absProgress = Math.abs(progress);

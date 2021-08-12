@@ -58,7 +58,9 @@ function UseScrollEvent({ wheelSensitive }: UseScrollEventProps) {
   // Touch Move Event의 동작을 처리힙니다.
   const touchMoveCallback = useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {
-      if (typeof touchY === 'number') eventHandler(touchY - e.touches[0].clientY);
+      if (typeof touchY === 'number') {
+        eventHandler((touchY - e.touches[0].clientY) * wheelSensitive);
+      }
     },
     [touchY],
   );

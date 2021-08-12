@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 
 import data from 'static/animation/sequence01.json';
 import styleScene01 from 'styles/page/scene01.module.scss';
-import UseSequnce from 'modules/hooks/use-sequence';
+import UseShort from 'modules/hooks/use-short';
 
 const cxScene = classNames.bind(styleScene01);
 const info = data.cuts.text;
@@ -19,7 +19,7 @@ function Text({ short, progress, stageWidth, stageHeight }: TextProps) {
   const target = useRef<HTMLDivElement>(null);
   const textCalss = useMemo(() => cxScene('text', 'font-main-ko'), []);
 
-  const { style } = UseSequnce({
+  const { style } = UseShort({
     short,
     progress,
     target: target.current,

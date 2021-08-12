@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 
 import data from 'static/animation/sequence01.json';
 import styleScene01 from 'styles/page/scene01.module.scss';
-import UseSequnce from 'modules/hooks/use-sequence';
+import UseShort from 'modules/hooks/use-short';
 
 const cxScene = classNames.bind(styleScene01);
 const info = data.cuts.subTitle;
@@ -19,7 +19,7 @@ function SubTitle({ short, progress, stageWidth, stageHeight }: SubTitleProps) {
   const target = useRef<HTMLDivElement>(null);
   const titleClass = useMemo(() => cxScene('sub-title', 'font-title-ko'), []);
 
-  const { style } = UseSequnce({
+  const { style } = UseShort({
     short,
     progress,
     target: target.current,
