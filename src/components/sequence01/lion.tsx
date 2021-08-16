@@ -4,10 +4,10 @@ import Lottie from 'react-lottie';
 
 import data from 'static/animation/sequence01.json';
 import svg from 'static/svg/lion.json';
-import styleScene01 from 'styles/page/scene01.module.scss';
+import styleSequence from 'styles/page/sequence01.module.scss';
 import UseShort from 'modules/hooks/use-short';
 
-const cxScene = classNames.bind(styleScene01);
+const cxSequence = classNames.bind(styleSequence);
 const info = data.cuts.lion;
 
 interface LionProps {
@@ -30,7 +30,7 @@ const lottieOption = {
 function Lion({ short, nextShort, progress, stageWidth, stageHeight }: LionProps) {
   const target = useRef<HTMLDivElement>(null);
   const [play, setPlay] = useState<boolean>(false);
-  const lionClass = useMemo(() => cxScene('lion'), []);
+  const lionClass = useMemo(() => cxSequence('lion'), []);
 
   const { style } = UseShort({
     short,

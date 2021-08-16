@@ -2,7 +2,7 @@ import React, { useMemo, useRef } from 'react';
 import classNames from 'classnames/bind';
 
 import data from 'static/animation/sequence01.json';
-import styleScene01 from 'styles/page/scene01.module.scss';
+import styleSequence from 'styles/page/sequence01.module.scss';
 import UseShort from 'modules/hooks/use-short';
 import UseSequence from 'modules/hooks/use-sequence';
 
@@ -13,7 +13,7 @@ import Lion from 'components/sequence01/lion';
 import Scroll from 'components/sequence01//scroll';
 import Text from 'components/sequence01/text';
 
-const cxScene = classNames.bind(styleScene01);
+const cxSequence = classNames.bind(styleSequence);
 const info = data.cuts.container;
 
 interface Sequence01Props {
@@ -28,8 +28,8 @@ function Sequence01({ scene, progress, appWidth, appHeight, registAction }: Sequ
   const container = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
 
-  const containerClass = useMemo(() => cxScene('container'), []);
-  const stageClass = useMemo(() => cxScene('stage'), []);
+  const containerClass = useMemo(() => cxSequence('container'), []);
+  const stageClass = useMemo(() => cxSequence('stage'), []);
 
   const { short, nextShort } = UseSequence({ scene, progress, data, registAction });
   const { style, targetWidth, targetHeight } = UseShort({

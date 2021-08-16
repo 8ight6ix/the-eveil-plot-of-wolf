@@ -1,13 +1,13 @@
 {
   "startScene": 0,
   "duration": 1200,
-  "shortEnd": 3,
-  "shortDest": [2, 3],
+  "shortEnd": 4,
+  "shortDest": [2, 3, 4],
   "cuts": {
     "container": {
       "baseWidth": 100,
       "baseHeight": 100,
-      "animationData": [{ "x": 0, "y": 0 }]
+      "animationData": [{ "x": 0, "y": 0 }, {}, {}, {}, { "y": -100 }]
     },
     "title": {
       "baseWidth": 1920,

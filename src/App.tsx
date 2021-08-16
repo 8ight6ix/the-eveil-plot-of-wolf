@@ -1,7 +1,9 @@
 import React, { useState, useCallback, useRef, useMemo, useEffect } from 'react';
 
-import useScrollEvent from 'modules/hooks/use-scroll-event';
 import Sequence01 from 'components/sequence01';
+import Sequence03 from 'components/sequence03';
+
+import useScrollEvent from 'modules/hooks/use-scroll-event';
 import animation from 'static/animation/index.json';
 import 'styles/main.scss';
 
@@ -69,6 +71,7 @@ function App() {
       onTouchEnd={touchEndCallback}
     >
       <Sequence01 scene={scene} progress={dist} appWidth={width} appHeight={height} registAction={registAction} />
+      <Sequence03 scene={scene} progress={dist} appWidth={width} appHeight={height} registAction={registAction} />
     </div>
   );
 }

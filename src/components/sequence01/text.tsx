@@ -2,10 +2,10 @@ import React, { useMemo, useRef } from 'react';
 import classNames from 'classnames/bind';
 
 import data from 'static/animation/sequence01.json';
-import styleScene01 from 'styles/page/scene01.module.scss';
+import styleSequence from 'styles/page/sequence01.module.scss';
 import UseShort from 'modules/hooks/use-short';
 
-const cxScene = classNames.bind(styleScene01);
+const cxSequence = classNames.bind(styleSequence);
 const info = data.cuts.text;
 
 interface TextProps {
@@ -18,7 +18,7 @@ interface TextProps {
 
 function Text({ short, nextShort, progress, stageWidth, stageHeight }: TextProps) {
   const target = useRef<HTMLDivElement>(null);
-  const textCalss = useMemo(() => cxScene('text', 'font-main-ko'), []);
+  const textCalss = useMemo(() => cxSequence('text', 'font-main-ko'), []);
 
   const { style } = UseShort({
     short,

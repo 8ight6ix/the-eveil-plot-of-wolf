@@ -4,10 +4,10 @@ import Lottie from 'react-lottie';
 
 import data from 'static/animation/sequence01.json';
 import svg from 'static/svg/scroll.json';
-import styleScene01 from 'styles/page/scene01.module.scss';
+import styleSequence from 'styles/page/sequence01.module.scss';
 import UseShort from 'modules/hooks/use-short';
 
-const cxScene = classNames.bind(styleScene01);
+const cxSequence = classNames.bind(styleSequence);
 const info = data.cuts.scroll;
 
 interface ScrollProps {
@@ -30,7 +30,7 @@ const lottieOption = {
 function Scroll({ short, nextShort, progress, stageWidth, stageHeight }: ScrollProps) {
   const target = useRef<HTMLDivElement>(null);
   const [play, setPlay] = useState<boolean>(false);
-  const lionClass = useMemo(() => cxScene('scroll'), []);
+  const lionClass = useMemo(() => cxSequence('scroll'), []);
 
   const { style } = UseShort({
     short,

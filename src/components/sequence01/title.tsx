@@ -3,10 +3,10 @@ import classNames from 'classnames/bind';
 
 import data from 'static/animation/sequence01.json';
 import svg from 'static/svg/title.svg';
-import styleScene01 from 'styles/page/scene01.module.scss';
+import styleSequence from 'styles/page/sequence01.module.scss';
 import UseShort from 'modules/hooks/use-short';
 
-const cxScene = classNames.bind(styleScene01);
+const cxSequence = classNames.bind(styleSequence);
 const info = data.cuts.title;
 
 interface TitleProps {
@@ -19,7 +19,7 @@ interface TitleProps {
 
 function Title({ short, nextShort, progress, stageWidth, stageHeight }: TitleProps) {
   const target = useRef<HTMLDivElement>(null);
-  const titleClass = useMemo(() => cxScene('title', 'font-title-en'), []);
+  const titleClass = useMemo(() => cxSequence('title', 'font-title-en'), []);
 
   const { style } = UseShort({
     short,

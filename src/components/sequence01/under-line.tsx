@@ -2,10 +2,10 @@ import React, { useMemo, useRef } from 'react';
 import classNames from 'classnames/bind';
 
 import data from 'static/animation/sequence01.json';
-import styleScene01 from 'styles/page/scene01.module.scss';
+import styleSequence from 'styles/page/sequence01.module.scss';
 import UseShort from 'modules/hooks/use-short';
 
-const cxScene = classNames.bind(styleScene01);
+const cxSequence = classNames.bind(styleSequence);
 const info = data.cuts.underLine;
 
 interface UnderLineProps {
@@ -18,7 +18,7 @@ interface UnderLineProps {
 
 function UnderLine({ short, nextShort, progress, stageWidth, stageHeight }: UnderLineProps) {
   const target = useRef<HTMLDivElement>(null);
-  const underLineClass = useMemo(() => cxScene('under-line'), []);
+  const underLineClass = useMemo(() => cxSequence('under-line'), []);
 
   const { style } = UseShort({
     short,
