@@ -1,22 +1,8 @@
-import React, { useMemo, useRef, useState, useEffect } from 'react';
-import classNames from 'classnames/bind';
+import React, { useState, useEffect } from 'react';
 import Lottie from 'react-lottie';
 
-import data from 'static/animation/sequence01.json';
+import withActor, { ContentProps } from 'modules/hocs/actor';
 import svg from 'static/svg/scroll.json';
-import styleSequence from 'styles/page/sequence01.module.scss';
-import UseShort from 'modules/hooks/use-short';
-
-const cxSequence = classNames.bind(styleSequence);
-const info = data.cuts.scroll;
-
-interface ScrollProps {
-  short: number;
-  nextShort: number;
-  progress: number;
-  stageWidth: number;
-  stageHeight: number;
-}
 
 const lottieOption = {
   loop: true,
@@ -27,32 +13,14 @@ const lottieOption = {
   },
 };
 
-function Scroll({ short, nextShort, progress, stageWidth, stageHeight }: ScrollProps) {
-  const target = useRef<HTMLDivElement>(null);
+function Scroll({ short }: ContentProps) {
   const [play, setPlay] = useState<boolean>(false);
-  const lionClass = useMemo(() => cxSequence('scroll'), []);
-
-  const { style } = UseShort({
-    short,
-    nextShort,
-    progress,
-    target: target.current,
-    duration: data.duration,
-    shortEnd: data.shortEnd,
-    stageWidth,
-    stageHeight,
-    data: info,
-  });
 
   useEffect(() => {
     setPlay(short === 2);
   }, [short]);
 
-  return (
-    <div style={style} ref={target} className={lionClass}>
-      <Lottie options={lottieOption} isPaused={!play} />
-    </div>
-  );
+  return <Lottie options={lottieOption} isPaused={!play} />;
 }
 
-export default Scroll;
+export default withActor({ className: 'scroll' })(Scroll);

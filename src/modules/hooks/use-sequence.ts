@@ -2,13 +2,13 @@ import { useState, useMemo, useEffect } from 'react';
 
 import { callAfterRerender } from 'modules/helper';
 
-interface UseSequenceData {
+export interface UseSequenceData {
   duration: number;
   startScene: number;
   shortDest: number[];
 }
 
-interface UseSequenceProps {
+export interface UseSequenceProps {
   scene: number;
   progress: number;
   data: UseSequenceData;

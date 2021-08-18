@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 
-interface UseScrollEventProps {
+export interface UseScrollEventProps {
   wheelSensitive: number;
 }
 

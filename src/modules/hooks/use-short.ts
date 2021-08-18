@@ -3,13 +3,13 @@ import { useState, useMemo, useEffect } from 'react';
 import { AnimtaionRowData } from 'modules/animation/model';
 import { parseRowDatas, parseAnimation, parseStyle } from 'modules/animation';
 
-interface UuseShortData {
+export interface UseShortData {
   baseWidth: number;
   baseHeight: number;
   animationData: AnimtaionRowData[];
 }
 
-interface useShorteProps {
+export interface useShorteProps {
   short: number;
   nextShort: number;
   progress: number;
@@ -18,7 +18,7 @@ interface useShorteProps {
   shortEnd: number;
   stageWidth: number;
   stageHeight: number;
-  data: UuseShortData;
+  data: UseShortData;
 }
 
 function useShort({

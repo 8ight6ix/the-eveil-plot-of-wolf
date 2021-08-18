@@ -1,42 +1,9 @@
-import React, { useMemo, useRef } from 'react';
-import classNames from 'classnames/bind';
+import React from 'react';
 
-import data from 'static/animation/sequence01.json';
-import styleSequence from 'styles/page/sequence01.module.scss';
-import UseShort from 'modules/hooks/use-short';
+import withActor from 'modules/hocs/actor';
 
-const cxSequence = classNames.bind(styleSequence);
-const info = data.cuts.subTitle;
-
-interface SubTitleProps {
-  short: number;
-  nextShort: number;
-  progress: number;
-  stageWidth: number;
-  stageHeight: number;
+function SubTitle() {
+  return <span>이솝 이야기: 늑대의 흉계</span>;
 }
 
-function SubTitle({ short, nextShort, progress, stageWidth, stageHeight }: SubTitleProps) {
-  const target = useRef<HTMLDivElement>(null);
-  const titleClass = useMemo(() => cxSequence('sub-title', 'font-title-ko'), []);
-
-  const { style } = UseShort({
-    short,
-    nextShort,
-    progress,
-    target: target.current,
-    duration: data.duration,
-    shortEnd: data.shortEnd,
-    stageWidth,
-    stageHeight,
-    data: info,
-  });
-
-  return (
-    <span style={style} ref={target} className={titleClass}>
-      이솝 이야기: 늑대의 흉계
-    </span>
-  );
-}
-
-export default SubTitle;
+export default withActor({ className: 'sub-title font-title-ko' })(SubTitle);

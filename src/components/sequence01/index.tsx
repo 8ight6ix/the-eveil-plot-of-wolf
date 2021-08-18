@@ -1,103 +1,36 @@
-import React, { useMemo, useRef } from 'react';
-import classNames from 'classnames/bind';
+import React from 'react';
 
-import data from 'static/animation/sequence01.json';
+import withSequence, { ContentProps } from 'modules/hocs/sequence';
 import styleSequence from 'styles/page/sequence01.module.scss';
-import UseShort from 'modules/hooks/use-short';
-import UseSequence from 'modules/hooks/use-sequence';
+import data from 'static/animation/sequence01.json';
 
 import Title from 'components/sequence01/title';
 import UnderLine from 'components/sequence01/under-line';
 import SubTitle from 'components/sequence01/sub-title';
 import Lion from 'components/sequence01/lion';
-import Scroll from 'components/sequence01//scroll';
+import Scroll from 'components/sequence01/scroll';
 import Text from 'components/sequence01/text';
 
-const cxSequence = classNames.bind(styleSequence);
-const info = data.cuts.container;
-
-interface Sequence01Props {
-  scene: number;
-  progress: number;
-  appWidth: number;
-  appHeight: number;
-  registAction: (regist: boolean) => void;
-}
-
-function Sequence01({ scene, progress, appWidth, appHeight, registAction }: Sequence01Props) {
-  const container = useRef<HTMLDivElement>(null);
-  const stage = useRef<HTMLDivElement>(null);
-
-  const containerClass = useMemo(() => cxSequence('container'), []);
-  const stageClass = useMemo(() => cxSequence('stage'), []);
-
-  const { short, nextShort } = UseSequence({ scene, progress, data, registAction });
-  const { style, targetWidth, targetHeight } = UseShort({
-    short,
-    nextShort,
-    progress,
-    target: container.current,
-    duration: data.duration,
-    shortEnd: data.shortEnd,
-    stageWidth: appWidth,
-    stageHeight: appHeight,
-    data: info,
-  });
-
-  //  하위 컴포너트가 필요한 것은 Container의 사이즈가 아니라 Stage의 사이즈입니다.
-  const [stageWidth, stageHeight] = useMemo(() => {
-    if (!stage.current) return [0, 0];
-    return [stage.current.clientWidth, stage.current.clientHeight];
-  }, [stage.current, targetWidth, targetHeight]);
-
+function Sequence01({ common }: ContentProps) {
   return (
-    <div className={containerClass} style={style} ref={container}>
-      <div className={stageClass} ref={stage}>
-        <Title
-          short={short}
-          nextShort={nextShort}
-          progress={progress}
-          stageWidth={stageWidth}
-          stageHeight={stageHeight}
-        />
-        <UnderLine
-          short={short}
-          nextShort={nextShort}
-          progress={progress}
-          stageWidth={stageWidth}
-          stageHeight={stageHeight}
-        />
-        <SubTitle
-          short={short}
-          nextShort={nextShort}
-          progress={progress}
-          stageWidth={stageWidth}
-          stageHeight={stageHeight}
-        />
-        <Lion
-          short={short}
-          nextShort={nextShort}
-          progress={progress}
-          stageWidth={stageWidth}
-          stageHeight={stageHeight}
-        />
-        <Scroll
-          short={short}
-          nextShort={nextShort}
-          progress={progress}
-          stageWidth={stageWidth}
-          stageHeight={stageHeight}
-        />
-        <Text
-          short={short}
-          nextShort={nextShort}
-          progress={progress}
-          stageWidth={stageWidth}
-          stageHeight={stageHeight}
-        />
-      </div>
-    </div>
+    <>
+      <Title common={common} data={data.cuts.title} />
+      <UnderLine common={common} data={data.cuts.underLine} />
+      <SubTitle common={common} data={data.cuts.subTitle} />
+      <Lion common={common} data={data.cuts.lion} />
+      <Scroll common={common} data={data.cuts.scroll} />
+      <Text common={common} data={data.cuts.text} />
+    </>
   );
 }
 
-export default Sequence01;
+export default withSequence({
+  cx: styleSequence,
+  containerClassName: 'container',
+  stageClassName: 'stage',
+  startScene: data.startScene,
+  duration: data.duration,
+  shortEnd: data.shortEnd,
+  shortDest: data.shortDest,
+  data: data.cuts.container,
+})(Sequence01);
