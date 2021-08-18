@@ -57,6 +57,7 @@ const withSequence = ({
         nextShort,
         progress,
         target: containerRef.current,
+        startScene,
         duration,
         shortEnd,
         stageWidth: appWidth,
@@ -71,8 +72,8 @@ const withSequence = ({
       }, [stageRef.current, targetWidth, targetHeight]);
 
       const common = useMemo(
-        () => ({ short, nextShort, progress, stageWidth, stageHeight, shortEnd, duration, cxSequence }),
-        [short, nextShort, progress, stageWidth, stageHeight, shortEnd, duration, cxSequence],
+        () => ({ short, nextShort, progress, stageWidth, stageHeight, shortEnd, startScene, duration, cxSequence }),
+        [short, nextShort, progress, stageWidth, stageHeight, shortEnd, startScene, duration, cxSequence],
       );
 
       return (

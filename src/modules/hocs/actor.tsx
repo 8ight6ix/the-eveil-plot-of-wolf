@@ -19,6 +19,7 @@ export interface ActorCommonProps {
   stageWidth: number;
   stageHeight: number;
 
+  startScene: number;
   shortEnd: number;
   duration: number;
 
@@ -34,7 +35,7 @@ const withActor =
   ({ className }: ActorConfigs) =>
   (WrapperComponent: (prop: ContentProps) => JSX.Element) =>
   ({
-    common: { short, nextShort, progress, stageWidth, stageHeight, shortEnd, duration, cxSequence },
+    common: { short, nextShort, progress, stageWidth, stageHeight, startScene, shortEnd, duration, cxSequence },
     data,
   }: ActorProps) => {
     const ref = useRef<HTMLDivElement>(null);
@@ -45,6 +46,7 @@ const withActor =
       nextShort,
       progress,
       target: ref.current,
+      startScene,
       duration,
       shortEnd,
       stageWidth,

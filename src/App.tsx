@@ -13,7 +13,7 @@ function App() {
   const [height, setHeight] = useState(document.body.clientHeight); // Application Height
 
   const actionCnt = useRef<number>(0); // 현재 Action 수행중인 Sequence 갯수
-  const isMaxScene = useMemo(() => scene === animation.totalScene - 1, [scene]); // 현재 Scene이 마지막인지 여부
+  const isMaxScene = useMemo(() => scene === animation.totalScene, [scene]); // 현재 Scene이 마지막인지 여부
   const isMinScene = useMemo(() => scene === 0, [scene]); // 현재 Scene이 처음인지 여부
 
   const { dist, initDist, setFreeze, wheelCallback, touchStartCallback, touchMoveCallback, touchEndCallback } =

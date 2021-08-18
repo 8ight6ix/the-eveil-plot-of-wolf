@@ -45,3 +45,22 @@
     width: $lw;
   }
 }
+
+@mixin text {
+  position: relative;
+  width: 100%;
+
+  & p {
+    position: relative;
+    text-align: center;
+    font-size: 14px;
+    line-height: 44px;
+    top: 15px;
+
+    @include respond-to('regular') {
+      font-size: 24px;
+      line-height: 74px;
+      top: 25px;
+    }
+  }
+}
