@@ -1,16 +1,16 @@
 import React from 'react';
 
 import withSequence, { ContentProps } from 'modules/hocs/sequence';
-import styleSequence from 'styles/page/sequence03.module.scss';
-import data from 'static/animation/sequence03.json';
+import styleSequence from 'styles/page/sequence04.module.scss';
+import data from 'static/animation/sequence04.json';
 
-import LionWolf from 'components/sequence03/lion-wolf';
-import Text from 'components/sequence03/text';
+import LionWolf from 'components/sequence04/fox';
+import Text from 'components/sequence04/text';
 
-function Sequence03({ common }: ContentProps) {
+function Sequence04({ common }: ContentProps) {
   return (
     <>
-      <LionWolf common={common} data={data.cuts.lionWolf} />
+      <LionWolf common={common} data={data.cuts.fox} />
       <Text common={common} data={data.cuts.text} />
     </>
   );
@@ -25,4 +25,4 @@ export default withSequence({
   shortEnd: data.shortEnd,
   shortDest: data.shortDest,
   data: data.cuts.container,
-})(Sequence03);
+})(Sequence04);

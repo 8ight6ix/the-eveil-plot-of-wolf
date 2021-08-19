@@ -9,6 +9,7 @@ export interface UseSequenceData {
 }
 
 export interface UseSequenceProps {
+  key: string; // For Debug
   scene: number;
   progress: number;
   data: UseSequenceData;

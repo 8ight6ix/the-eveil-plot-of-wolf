@@ -10,6 +10,7 @@ export interface ActorConfigs {
 export interface ContentProps {
   short: number;
   shortEnd: number;
+  duration: number;
 }
 
 export interface ActorCommonProps {
@@ -56,7 +57,7 @@ const withActor =
 
     return (
       <div ref={ref} style={style} className={name}>
-        <WrapperComponent short={short} shortEnd={shortEnd} />
+        <WrapperComponent short={short} shortEnd={shortEnd} duration={duration} />
       </div>
     );
   };

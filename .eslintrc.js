@@ -37,5 +37,6 @@ module.exports = {
   globals: {
     React: 'readonly',
     JSX: 'readonly',
+    NodeJS: 'readonly',
   },
 };

@@ -47,11 +47,21 @@ const withSequence = ({
   const seqData = { duration, startScene, shortDest, shortEnd };
 
   return (WrapperComponent: (prop: ContentProps) => JSX.Element) =>
-    ({ scene, progress, appWidth, appHeight, registAction }: SequenceProp) => {
+    ({ scene, progress: _progress, appWidth, appHeight, registAction }: SequenceProp) => {
       const containerRef = useRef<any>(null);
       const stageRef = useRef<any>(null);
 
-      const { short, nextShort } = UseSequence({ scene, progress, data: seqData, registAction });
+      // start scene에 도달하지 못하면 progress는 0입니다.
+      const progress = useMemo(() => (scene >= startScene ? _progress : 0), [scene, startScene, _progress]);
+
+      const { short, nextShort } = UseSequence({
+        key: WrapperComponent.name,
+        scene,
+        progress,
+        data: seqData,
+        registAction,
+      });
+
       const { style, targetWidth, targetHeight } = useShort({
         short,
         nextShort,
@@ -71,10 +81,10 @@ const withSequence = ({
         return [stageRef.current.clientWidth, stageRef.current.clientHeight];
       }, [stageRef.current, targetWidth, targetHeight]);
 
-      const common = useMemo(
-        () => ({ short, nextShort, progress, stageWidth, stageHeight, shortEnd, startScene, duration, cxSequence }),
-        [short, nextShort, progress, stageWidth, stageHeight, shortEnd, startScene, duration, cxSequence],
-      );
+      // Actor들의 공통된 데이터를 만듭니다.
+      const common = useMemo(() => {
+        return { short, nextShort, progress, stageWidth, stageHeight, shortEnd, startScene, duration, cxSequence };
+      }, [short, nextShort, progress, stageWidth, stageHeight, shortEnd, startScene, duration, cxSequence]);
 
       return (
         <div className={containerName} style={style} ref={containerRef}>

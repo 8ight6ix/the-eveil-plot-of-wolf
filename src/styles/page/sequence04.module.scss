@@ -1,0 +1,23 @@
+@import '../util/sequence';
+
+.container {
+  @include container(100px, 80px, 130px, 100px);
+}
+
+.stage {
+  @include stage(320px, 678px, 1280px, true);
+}
+
+.fox {
+  width: 199px;
+  padding-bottom: 154px;
+
+  @include respond-to('regular') {
+    width: 339px;
+    padding-bottom: 194px;
+  }
+}
+
+.text {
+  @include text;
+}

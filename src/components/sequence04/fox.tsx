@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Lottie from 'react-lottie';
 
 import withActor, { ContentProps } from 'modules/hocs/actor';
-import svg from 'static/svg/lion-wolf.json';
+import svg from 'static/svg/fox.json';
 
 const lottieOption = {
   loop: true,
@@ -13,7 +13,7 @@ const lottieOption = {
   },
 };
 
-function LionWolf({ short, duration }: ContentProps) {
+function Fox({ short, duration }: ContentProps) {
   const [stop, setStop] = useState<boolean>(true);
   const [paused, setPaused] = useState<boolean>(true);
   const willStop = useRef<NodeJS.Timeout | null>(null);
@@ -39,4 +39,4 @@ function LionWolf({ short, duration }: ContentProps) {
   return <Lottie options={lottieOption} isPaused={paused} isStopped={stop} />;
 }
 
-export default withActor({ className: 'lion-wolf' })(LionWolf);
+export default withActor({ className: 'fox' })(Fox);

@@ -53,6 +53,9 @@
   & p {
     position: relative;
     text-align: center;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    opacity: 0.8;
     font-size: 14px;
     line-height: 44px;
     top: 15px;
