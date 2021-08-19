@@ -3,6 +3,7 @@ import React, { useState, useCallback, useRef, useMemo, useEffect } from 'react'
 import Sequence01 from 'components/sequence01';
 import Sequence03 from 'components/sequence03';
 import Sequence04 from 'components/sequence04';
+import Sequence05 from 'components/sequence05';
 
 import useScrollEvent from 'modules/hooks/use-scroll-event';
 import animation from 'static/animation/index.json';
@@ -77,6 +78,7 @@ function App() {
       <Sequence01 scene={scene} progress={dist} appWidth={width} appHeight={height} registAction={registAction} />
       <Sequence03 scene={scene} progress={dist} appWidth={width} appHeight={height} registAction={registAction} />
       <Sequence04 scene={scene} progress={dist} appWidth={width} appHeight={height} registAction={registAction} />
+      <Sequence05 scene={scene} progress={dist} appWidth={width} appHeight={height} registAction={registAction} />
     </div>
   );
 }

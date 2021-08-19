@@ -27,7 +27,6 @@ function Fox({ short, duration }: ContentProps) {
     if (short === 1) {
       if (paused) setPaused(false);
       if (stop) setStop(false);
-      clearWillStop();
     } else {
       if (!paused) setPaused(true);
       if (!stop) willStop.current = setTimeout(() => setStop(true), duration);
