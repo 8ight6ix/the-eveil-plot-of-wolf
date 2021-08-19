@@ -1,0 +1,28 @@
+@import '../util/sequence';
+
+.container {
+  @include container(100px, 80px, 130px, 100px);
+}
+
+.stage {
+  @include stage(320px, 678px, 1280px, true);
+}
+
+.lion-fox {
+  width: 300px;
+  padding-bottom: 184px;
+
+  @include respond-to('regular') {
+    width: 630px;
+    padding-bottom: 294px;
+  }
+
+  @include respond-to('medium') {
+    width: 1200px;
+    padding-bottom: 194px;
+  }
+}
+
+.text {
+  @include text;
+}
