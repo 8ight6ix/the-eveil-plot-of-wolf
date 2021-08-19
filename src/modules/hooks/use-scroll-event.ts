@@ -26,22 +26,17 @@ function UseScrollEvent({ wheelSensitive }: UseScrollEventProps) {
   // 스크롤 이벤트 동작을 처리합니다.
   const eventHandler = useCallback(
     (delta: number) => {
-      // 선언된 Flag가 있으면 동작하지 않습니다.
-      if (eventFlag.current || freezeFlag.current) return;
-
-      const diff = Math.abs(dist - delta);
+      // Event Flag를 사용해 Debounce를 적용합니다.
+      if (eventFlag.current || Math.abs(dist - delta) < 1) return;
       eventFlag.current = true;
 
       window.requestAnimationFrame(() => {
-        // 스크롤 움직임을 Dist에 반영하고, Event Flag는 제거합니다.
-        eventFlag.current = false;
-        if (diff > 1) setDist(delta);
+        eventFlag.current = false; // Debounce를 헤제합니다.
+        if (!freezeFlag.current) setDist(delta); // Freeze 상태이면 Dist를 업데이트하지 못합니다.
 
-        // Freeze 상태가 아닌데 Scroll Event가 멈추면 Dist를 초기화합니다.
+        // Scroll Event가 멈추면 Dist를 초기화합니다.
         if (eventStopOut.current) clearTimeout(eventStopOut.current);
-        eventStopOut.current = setTimeout(() => {
-          if (!freezeFlag.current) initDist();
-        }, 400);
+        eventStopOut.current = setTimeout(() => initDist(), 400);
       });
     },
     [dist],
