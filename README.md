@@ -1,6 +1,6 @@
 # 이솝 우화 늑대의 흉계
 
-이솝우화 늑대의 흉계 이야기를 사용자와의 인터렉션을 통해 보여줍니다. ![웹 페이지 이동하기](https://8ight6ix.github.io/artworks/sample01)
+이솝우화 늑대의 흉계 이야기를 사용자와의 인터렉션을 통해 보여줍니다. [웹 페이지 이동하기](https://8ight6ix.github.io/artworks/sample01)
 
 ## 1. Locat Test
 
