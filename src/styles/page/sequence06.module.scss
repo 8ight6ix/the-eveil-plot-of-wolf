@@ -8,18 +8,18 @@
   @include stage(320px, 678px, 1280px);
 }
 
-.lion-fox {
-  width: 300px;
-  padding-bottom: 184px;
+.fox-turtle {
+  width: 191.5px;
+  padding-bottom: 244px;
 
   @include respond-to('regular') {
-    width: 630px;
-    padding-bottom: 294px;
+    width: 325px;
+    padding-bottom: 344px;
   }
 
   @include respond-to('medium') {
-    width: 1200px;
-    padding-bottom: 194px;
+    width: 383px;
+    padding-bottom: 244px;
   }
 }
 

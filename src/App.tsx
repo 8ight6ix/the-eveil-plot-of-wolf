@@ -4,13 +4,11 @@ import Sequence01 from 'components/sequence01';
 import Sequence03 from 'components/sequence03';
 import Sequence04 from 'components/sequence04';
 import Sequence05 from 'components/sequence05';
+import Sequence06 from 'components/sequence06';
 
 import useScrollEvent from 'modules/hooks/use-scroll-event';
 import animation from 'static/animation/index.json';
 import 'styles/main.scss';
-
-// FIXME: moveNextScene가 실행되어 dist가 0이 된 후, 높은 수치를 갖는 밀린 evnet가 들어옵니다.
-// FIXME: 한번에 여러개의 scene가 이동하면서 전체적으로 꼬입니다.
 
 function App() {
   const [scene, setScene] = useState(0); // 현재 Scene 번호
@@ -79,6 +77,7 @@ function App() {
       <Sequence03 scene={scene} progress={dist} appWidth={width} appHeight={height} registAction={registAction} />
       <Sequence04 scene={scene} progress={dist} appWidth={width} appHeight={height} registAction={registAction} />
       <Sequence05 scene={scene} progress={dist} appWidth={width} appHeight={height} registAction={registAction} />
+      <Sequence06 scene={scene} progress={dist} appWidth={width} appHeight={height} registAction={registAction} />
     </div>
   );
 }

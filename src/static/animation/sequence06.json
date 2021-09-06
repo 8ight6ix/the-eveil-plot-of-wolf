@@ -1,0 +1,23 @@
+{
+  "startScene": 4,
+  "duration": 1200,
+  "shortEnd": 2,
+  "shortDest": [0, 1, 2],
+  "cuts": {
+    "container": {
+      "baseWidth": 100,
+      "baseHeight": 100,
+      "animationData": [{ "x": 0, "y": 100 }, { "y": 0 }, { "y": -100 }]
+    },
+    "foxTurtle": {
+      "baseWidth": 1920,
+      "baseHeight": 1080,
+      "animationData": [{ "x": 960, "y": 1080, "marginLeft": -50, "marginTop": -100 }]
+    },
+    "text": {
+      "baseWidth": 1920,
+      "baseHeight": 1080,
+      "animationData": [{ "x": 960, "y": 1080, "marginLeft": -50, "marginTop": -100 }]
+    }
+  }
+}
