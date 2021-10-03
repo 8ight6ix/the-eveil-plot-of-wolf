@@ -20,6 +20,7 @@ export interface SequenceConfig {
 
 export interface ContentProps {
   common: ActorCommonProps;
+  registAction: (key: Symbol, regist: boolean) => void;
 }
 
 export interface SequenceProp {
@@ -28,7 +29,7 @@ export interface SequenceProp {
   appWidth: number;
   appHeight: number;
 
-  registAction: (regist: boolean) => void;
+  registAction: (key: Symbol, regist: boolean) => void;
 }
 
 const withSequence = ({
@@ -89,7 +90,7 @@ const withSequence = ({
       return (
         <div className={containerName} style={style} ref={containerRef}>
           <div className={stageName} ref={stageRef}>
-            <WrapperComponent common={common} />
+            <WrapperComponent common={common} registAction={registAction} />
           </div>
         </div>
       );

@@ -15,7 +15,7 @@ function App() {
   const [width, setWidth] = useState(document.body.clientWidth); // Application Width
   const [height, setHeight] = useState(document.body.clientHeight); // Application Height
 
-  const actionCnt = useRef<number>(0); // 현재 Action 수행중인 Sequence 갯수
+  const actionMap = useRef<Map<Symbol, boolean>>(new Map()); // 현재 Action 수행중인 개체
   const isMaxScene = useMemo(() => scene === animation.totalScene, [scene]); // 현재 Scene이 마지막인지 여부
   const isMinScene = useMemo(() => scene === 0, [scene]); // 현재 Scene이 처음인지 여부
 
@@ -36,12 +36,12 @@ function App() {
 
   // Sequence의 Action 실행/종료를 보고 받습니다.
   const registAction = useCallback(
-    (regist: boolean) => {
-      if (regist) actionCnt.current += 1;
-      else if (actionCnt.current > 0) actionCnt.current -= 1;
+    (key: Symbol, regist: boolean) => {
+      if (regist) actionMap.current.set(key, true);
+      else if (actionMap.current.has(key)) actionMap.current.delete(key);
 
       // Action이 실행중인 Sequence가 하나라도 있으면 스크롤 이벤트를 중단합니다.
-      setFreeze(actionCnt.current > 0);
+      setFreeze(actionMap.current.size > 0);
     },
     [setFreeze],
   );

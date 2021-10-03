@@ -11,6 +11,7 @@ export interface ContentProps {
   short: number;
   shortEnd: number;
   duration: number;
+  registAction?: (key: Symbol, regist: boolean) => void;
 }
 
 export interface ActorCommonProps {
@@ -30,6 +31,7 @@ export interface ActorCommonProps {
 export interface ActorProps {
   common: ActorCommonProps;
   data: UseShortData;
+  registAction?: (key: Symbol, regist: boolean) => void;
 }
 
 const withActor =
@@ -38,6 +40,7 @@ const withActor =
   ({
     common: { short, nextShort, progress, stageWidth, stageHeight, startScene, shortEnd, duration, cxSequence },
     data,
+    registAction,
   }: ActorProps) => {
     const ref = useRef<HTMLDivElement>(null);
     const name = useMemo(() => cxSequence(className.split(' ')), [cxSequence, className]);
@@ -57,7 +60,7 @@ const withActor =
 
     return (
       <div ref={ref} style={style} className={name}>
-        <WrapperComponent short={short} shortEnd={shortEnd} duration={duration} />
+        <WrapperComponent short={short} shortEnd={shortEnd} duration={duration} registAction={registAction} />
       </div>
     );
   };

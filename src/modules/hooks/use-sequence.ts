@@ -13,7 +13,7 @@ export interface UseSequenceProps {
   scene: number;
   progress: number;
   data: UseSequenceData;
-  registAction: (regist: boolean) => void;
+  registAction: (key: Symbol, regist: boolean) => void;
 }
 
 function UseSequence({ scene, progress, data, registAction }: UseSequenceProps) {
@@ -23,6 +23,7 @@ function UseSequence({ scene, progress, data, registAction }: UseSequenceProps) 
   const [short, setShort] = useState(0); // 현재 Sequence Short 번호
   const lastScene = useMemo(() => shortDest.length + startScene - 1, [shortDest, startScene]); // 더이상 진행할 내용일 없는 Scene 번호
   const isActive = useMemo(() => scene >= startScene && scene <= lastScene, [scene, startScene, lastScene]); // 현재 Scene 번호가 활동 범위인지 여부
+  const actionKey = useMemo(() => Symbol('sequence'), []);
 
   // Start Scene과 End Scene을 반영한 상대적은 Scene 번호
   const relativeScene = useMemo(
@@ -48,7 +49,7 @@ function UseSequence({ scene, progress, data, registAction }: UseSequenceProps) 
     // 그로인해 short가 before load => 0 => 1이 아니라, before load => 1이 반영됩니다.
     // requestAnimationFrame을 render 전에 다시 한번 요청하는 트릭을 사용해서 해결합니다.
     callAfterRerender(() => setShort(next));
-    registAction(true);
+    registAction(actionKey, true);
   }, [scene]);
 
   // Short가 변경되면 Transalte 동작 후 목표 Short 번호에 맞게 Actrion을 진행합니다.
@@ -61,7 +62,7 @@ function UseSequence({ scene, progress, data, registAction }: UseSequenceProps) 
 
     setTimeout(() => {
       // Short가 목표치에 도달하면 Action을 종료합니다.
-      if (isFinish) registAction(false);
+      if (isFinish) registAction(actionKey, false);
       // Short가 목표치에 도달하지 목하면 다음 short로 이동합니다.
       else setShort(next);
     }, duration);
