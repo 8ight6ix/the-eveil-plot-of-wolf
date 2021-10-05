@@ -1,5 +1,7 @@
 import React, { useState, useCallback, useRef, useMemo, useEffect } from 'react';
 
+import AlertScroll from 'components/alert-scroll';
+
 import Sequence01 from 'components/sequence01';
 import Sequence03 from 'components/sequence03';
 import Sequence04 from 'components/sequence04';
@@ -14,6 +16,7 @@ function App() {
   const [scene, setScene] = useState(0); // 현재 Scene 번호
   const [width, setWidth] = useState(document.body.clientWidth); // Application Width
   const [height, setHeight] = useState(document.body.clientHeight); // Application Height
+  const [scrollEnable, setScrollEnable] = useState(true); // 현재 스크롤이 가능한지 여부
 
   const actionMap = useRef<Map<Symbol, boolean>>(new Map()); // 현재 Action 수행중인 개체
   const isMaxScene = useMemo(() => scene === animation.totalScene, [scene]); // 현재 Scene이 마지막인지 여부
@@ -41,7 +44,11 @@ function App() {
       else if (actionMap.current.has(key)) actionMap.current.delete(key);
 
       // Action이 실행중인 Sequence가 하나라도 있으면 스크롤 이벤트를 중단합니다.
-      setFreeze(actionMap.current.size > 0);
+      const freeze = actionMap.current.size > 0;
+      setFreeze(freeze);
+
+      // 현재 스크롤이 가능 여부를 보여주기위해 값을 설정합니다.
+      setScrollEnable(!freeze);
     },
     [setFreeze],
   );
@@ -73,6 +80,7 @@ function App() {
       onTouchMove={touchMoveCallback}
       onTouchEnd={touchEndCallback}
     >
+      <AlertScroll enable={scrollEnable} />
       <Sequence01 scene={scene} progress={dist} appWidth={width} appHeight={height} registAction={registAction} />
       <Sequence03 scene={scene} progress={dist} appWidth={width} appHeight={height} registAction={registAction} />
       <Sequence04 scene={scene} progress={dist} appWidth={width} appHeight={height} registAction={registAction} />

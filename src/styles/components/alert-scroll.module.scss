@@ -1,0 +1,43 @@
+@import '../util/respond';
+
+.container {
+  position: fixed;
+  right: 24px;
+  top: 24px;
+
+  border: solid 1px rgba(black, 0.37);
+  border-radius: 4px;
+
+  width: 70px;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  & > p {
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.5;
+
+    padding: 4px 16px;
+  }
+
+  @include respond-to('regular') {
+    width: 80px;
+
+    & > p {
+      font-size: 14px;
+    }
+  }
+}
+
+.key {
+  color: white;
+  background-color: rgba(black, 0.37);
+}
+
+.value {
+  color: #41c300;
+}
+
+.value-invalid {
+  color: #ee0290;
+}
