@@ -9,11 +9,16 @@
 }
 
 .fox {
-  width: 199px;
+  width: 230px;
   padding-bottom: 154px;
 
   @include respond-to('regular') {
-    width: 339px;
+    width: 391px;
+    padding-bottom: 194px;
+  }
+
+  @include respond-to('medium') {
+    width: 460px;
     padding-bottom: 194px;
   }
 }

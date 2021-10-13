@@ -2,7 +2,7 @@ import React from 'react';
 
 import withActor from 'modules/hocs/actor';
 
-function Text() {
+function Text1() {
   return (
     <>
       <p>
@@ -17,4 +17,4 @@ function Text() {
   );
 }
 
-export default withActor({ className: 'text font-main-ko' })(Text);
+export default withActor({ className: 'text font-main-ko' })(Text1);

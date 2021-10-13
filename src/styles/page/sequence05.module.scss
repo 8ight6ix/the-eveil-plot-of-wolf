@@ -9,16 +9,16 @@
 }
 
 .lion-fox {
-  width: 300px;
+  width: 320px;
   padding-bottom: 184px;
 
   @include respond-to('regular') {
-    width: 630px;
+    width: 672px;
     padding-bottom: 294px;
   }
 
   @include respond-to('medium') {
-    width: 1200px;
+    width: 1280px;
     padding-bottom: 194px;
   }
 }

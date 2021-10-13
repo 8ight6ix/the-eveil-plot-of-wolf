@@ -8,17 +8,17 @@
   @include stage(320px, 678px, 1280px);
 }
 
-.fox-turtle {
-  width: 191.5px;
+.svg {
+  width: 280px;
   padding-bottom: 244px;
 
   @include respond-to('regular') {
-    width: 325px;
+    width: 476px;
     padding-bottom: 344px;
   }
 
   @include respond-to('medium') {
-    width: 383px;
+    width: 560px;
     padding-bottom: 244px;
   }
 }

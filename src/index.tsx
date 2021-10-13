@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 
 // eslint-disable-next-line no-console
-console.log('version 1.0.4');
+console.log('version 1.0.5');
 
 ReactDOM.render(
   <React.StrictMode>
