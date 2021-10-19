@@ -62,14 +62,14 @@
 }
 
 .lion {
-  width: 435px;
+  width: 320px;
 
   @include respond-to('regular') {
     width: 739.5px;
   }
 
   @include respond-to('medium') {
-    width: 870px;
+    width: 783px;
   }
 }
 
